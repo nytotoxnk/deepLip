@@ -1,0 +1,6 @@
+*.wav
+*.mp4
+whisper-small-sq/
+dataset_2023/clips/*.wav
+downloads/
+videos/
