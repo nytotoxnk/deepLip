@@ -36,7 +36,7 @@ def download_video(url, output_path='downloads', resolution='best', format='mp4'
         print(f"Warning: Could not fetch video info - {e}")
         # Continue with download anyway
     
-    # Build download command
+    # Build download command with simplified approach
     cmd = [
         'yt-dlp',
         '--no-warnings',
@@ -44,29 +44,32 @@ def download_video(url, output_path='downloads', resolution='best', format='mp4'
         '--no-playlist',
     ]
     
-    # Set output format
+    # Add format selection based on resolution and ensure proper audio
     if resolution == 'best':
-        if format == 'mp4':
-            # Best mp4 format
-            cmd.extend(['-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'])
-        else:
-            # Best format in any container
-            cmd.extend(['-f', 'bestvideo+bestaudio/best'])
+        # Simple approach - let yt-dlp handle the format selection
+        format_selector = 'bv*+ba/b'  # Best video + best audio / best combined
     else:
-        # Specific resolution
-        if resolution == '720p':
-            cmd.extend(['-f', f'bestvideo[height<=720][ext={format}]+bestaudio/best[height<=720][ext={format}]/best'])
-        elif resolution == '480p':
-            cmd.extend(['-f', f'bestvideo[height<=480][ext={format}]+bestaudio/best[height<=480][ext={format}]/best'])
-        elif resolution == '360p':
-            cmd.extend(['-f', f'bestvideo[height<=360][ext={format}]+bestaudio/best[height<=360][ext={format}]/best'])
-        else:
-            # Default to best if resolution not recognized
-            cmd.extend(['-f', 'bestvideo+bestaudio/best'])
+        # Height-based selection with audio
+        height = resolution.replace('p', '')
+        try:
+            height_int = int(height)
+            format_selector = f'bv*[height<={height_int}]+ba/b[height<={height_int}]'
+        except ValueError:
+            print(f"Invalid resolution format: {resolution}, defaulting to best")
+            format_selector = 'bv*+ba/b'
+    
+    cmd.extend(['-f', format_selector])
+    
+    # Ensure proper format conversion if needed
+    if format:
+        cmd.extend(['--merge-output-format', format])
     
     # Set output path and filename template
     output_template = os.path.join(output_path, '%(title)s.%(ext)s')
     cmd.extend(['-o', output_template])
+    
+    # Add verbose flag to get more information during download
+    cmd.append('-v')
     
     # Add the URL
     cmd.append(url)
@@ -97,7 +100,7 @@ def download_audio(url, output_path='downloads', audio_format='mp3', max_retries
     # Create output directory if it doesn't exist
     os.makedirs(output_path, exist_ok=True)
     
-    # Build download command
+    # Build download command with simplified approach
     cmd = [
         'yt-dlp',
         '--no-warnings',
@@ -111,6 +114,9 @@ def download_audio(url, output_path='downloads', audio_format='mp3', max_retries
     # Set output path and filename template
     output_template = os.path.join(output_path, '%(title)s.%(ext)s')
     cmd.extend(['-o', output_template])
+    
+    # Add verbose flag
+    cmd.append('-v')
     
     # Add the URL
     cmd.append(url)
@@ -159,10 +165,12 @@ def main():
                 print("Invalid retries value, using default of 3")
                 max_retries = 3
     
+    print(f"YouTube Downloader started. Downloading from: {url}")
+    
     if audio_only:
         download_audio(url, output_path, audio_format, max_retries)
     else:
         download_video(url, output_path, resolution, file_format, max_retries)
 
 if __name__ == "__main__":
-    main() 
+    main()

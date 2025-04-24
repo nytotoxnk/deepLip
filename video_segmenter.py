@@ -19,7 +19,7 @@ def extract_audio(video_path, output_path):
             '-i', video_path,
             '-vn',
             '-acodec', 'pcm_s16le',
-            '-ar', '44100',
+            '-ar', '16000',
             '-ac', '2',
             output_path
         ]
