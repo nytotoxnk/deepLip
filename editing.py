@@ -2,6 +2,14 @@ from pydub import AudioSegment, silence
 import os
 import subprocess
 import json
+"""
+1. Split audio from video file.
+2. Check for silence of 0.5 seconds on the audio to determine when to cut
+3. Cut video based on the time of silence
+4. Output is Multiple small videos 
+
+
+"""
 
 def split_video_on_silence(video_path, output_dir, max_chunk_length=15000, silence_thresh=-40):
     # Ensure directories exist
@@ -15,8 +23,8 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=15000, silen
     audio = AudioSegment.from_wav(temp_audio_path)
     
     # Detect silent chunks longer than 1s
-    silence_ranges = silence.detect_silence(audio, min_silence_len=1000, silence_thresh=silence_thresh)
-    silence_ranges = [(start, stop) for start, stop in silence_ranges if (stop - start) >= 1000]
+    silence_ranges = silence.detect_silence(audio, min_silence_len=500, silence_thresh=silence_thresh)
+    silence_ranges = [(start, stop) for start, stop in silence_ranges if (stop - start) >= 500]
     
     # Add boundaries for full coverage
     cuts = [0]
@@ -68,9 +76,9 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=15000, silen
             
             has_audio = any(stream['codec_type'] == 'audio' for stream in streams)
             if has_audio:
-                print(f"✓ Verified {out_path} has audio")
+                print(f"Verified {out_path} has audio")
             else:
-                print(f"✗ Warning: {out_path} has no audio!")
+                print(f"Warning: {out_path} has no audio!")
                 
         except subprocess.CalledProcessError as e:
             print(f"Error creating chunk {i+1}: {e}")
@@ -103,7 +111,7 @@ def extract_audio(video_path, output_path):
         raise
 
 if __name__ == "__main__":
-    video_path = os.path.normpath('downloads/')
+    video_path = os.path.normpath('videos/')
     output_dir = 'prepared_dataset'
     
     # Check if ffmpeg is available
