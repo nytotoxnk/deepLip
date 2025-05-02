@@ -28,6 +28,12 @@ def speech_to_text(path):
     audio_path = "temp_audio.wav"
     path.audio.write_audiofile(audio_path, fps=16000, logger=None)
 
+    # Need to write only to one file so this needs to be deleted and reworked, opening only one file and 
+    # writing new line with the name of the file it was transcribed first then the transcription itself
+    
+    # SAMPLE ROW
+    # video_file_1.mp4: Po perse more djale e bere kete gje jo te ndershme.
+
     # Base name for the transcription file
     base_name = audio_path[:-4] + ".txt" # Removing the last 4 letters .mp4 from the video file
 
@@ -47,30 +53,17 @@ def speech_to_text(path):
             content=audio_path
         )
             
-            # Transcribes the audio into text
+        # Transcribes the audio into text
         response = client.recognize(request=request)
 
         with open(base_name, "w", encoding="utf-8") as f:
             f.write(f"Transcript: {alternative.transcript}\nConfidence: {alternative.confidence}\n")
 
             # Going through the response from google speech to text API    
-            for result in response.results:
-                print(f"Transcript: {result.alternatives[0].transcript}")
-                    # have to save the transcript somehow, make the translation and then do a text-to-voice clone
-                print("\n Response --->",response)
-                print("\n Response.results --->",response.results)
-                alternative = result.alternatives[0]
-                for word_info in alternative.words:
-                    word = word_info.word
-                    start = word_info.start_offset
-                    end = word_info.end_offset
-                    
-                    start_time = start.seconds + start.nanos / 1e9
-                    end_time = end.seconds + end.nanos / 1e9
-                    
-                    # wirting the timing for the words into the transcription text file
-                    f.write(f"{word}: {start_time:.2f}-{end_time:.2f}\n")
-
+            
+            print(f"Transcript: {result.alternatives[0].transcript}")
+            # Have to save the transcript somehow, make the translation and then do a text-to-voice clone
+                
 
 
     except Exception as e:
