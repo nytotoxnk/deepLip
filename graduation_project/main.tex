@@ -203,6 +203,7 @@ Some of the usages of this lip-sync dubbing technology are: video dubbing and tr
 Visemes are visual representations of phonemes. Phonemes are the distinct units of sound in speech, or the individual sounds that make up speech.\\
 Purpose: Visemes serve to map sounds (phonemes) to corresponding mouth positions or shapes. The goal is to go from the audible (phonemes) to the visual (visemes). Visemes group similar-looking mouth shapes, which reduces the complexity required for animation. Mapping phonemes down to a smaller number of visemes gives artists fewer expressions to pose.
 
+
 \subsection{Separation of work}
 
 The first step for this project was the data creation, seeing as there is not a lot of free and publicly available free-use content I can use we had to create the data myself.\\
@@ -216,4 +217,7 @@ One of the reasons of why this is a hard problem is that you cannot just get the
 \textbf{One of the challanges of creating a lip synchronization in videos is the need for the lip movements to accurately align with a specified target speech segment, especially in multilingual and unconstrained environment. Visual data falling out of sunc with updated audio and inaccurate lip movements in target videos.}\\
 CNN and Generative Adversial Networks (GANs) to create the lip movements that sync up, this combined with a Discriminator Network which would try and detect the GANs fake lip movements and real ones, pushing each other to get better.
 
+\subsection{Work Steps Overview}
+
+From the video we need to get the transcription in albanian, for this step several models were tried and tested although only the google cloud API were the best performing one. The next and easiest step to implement is translating the transcription to the target language, translation has come a long way and there are many tools which can achieve high accuracy, we decided to use googe translate. The following task is to take the translated transcript and use a voice cloning tool/model to make the voice dubbing. \textbf{There are several models availabe which have not been tested by me yet.} After this we have to use object tracking to track the mouth area in the video to then use the deep learning model for lip frame creation. \textbf{This depends heavily on the model the will be applied.}
 \end{document}
