@@ -2,12 +2,8 @@ from google.cloud.speech_v2 import SpeechClient
 from google.cloud.speech_v2.types import cloud_speech
 from google.api_core.client_options import ClientOptions
 from google.cloud import speech_v2
-import random
 import os
 from google.api_core.exceptions import NotFound
-import editing
-from pydub import AudioSegment, silence
-from moviepy.editor import VideoFileClip
 
 # Google cloud data
 PROJECT_ID = "890676014334"
@@ -18,8 +14,6 @@ client_options_var = ClientOptions(api_endpoint="europe-west4-speech.googleapis.
 
 # Initialize the client
 client = speech_v2.SpeechClient(client_options=client_options_var)
-
-
 recogniser = f"projects/{PROJECT_ID}/locations/{LOCATION}/recognizers/albanian-recogniser"
 
 def speech_to_text(path):
@@ -35,7 +29,7 @@ def speech_to_text(path):
     # video_file_1.mp4: Po perse more djale e bere kete gje jo te ndershme.
 
     # Base name for the transcription file
-    base_name = audio_path[:-4] + ".txt" # Removing the last 4 letters .mp4 from the video file
+    base_name = "transcription_alb.txt"
 
     try:
         config = speech_v2.RecognitionConfig(
@@ -56,21 +50,19 @@ def speech_to_text(path):
         # Transcribes the audio into text
         response = client.recognize(request=request)
 
-        with open(base_name, "w", encoding="utf-8") as f:
-            f.write(f"Transcript: {alternative.transcript}\nConfidence: {alternative.confidence}\n")
+        # with a mode, append, we only add data at the end of the pointer.
+        with open(base_name, "a", encoding="utf-8") as f:
+            f.write(f"{path},{alternatives.confidence},{alternatives.transcript}\n")
 
             # Going through the response from google speech to text API    
             
-            print(f"Transcript: {result.alternatives[0].transcript}")
+            # print(f"Transcript: {result.alternatives[0].transcript}")
             # Have to save the transcript somehow, make the translation and then do a text-to-voice clone
-                
-
 
     except Exception as e:
         print(f"Error: {e}")
             
         print("\nRecognizer not found, bad name or something...")
-        
         
     # Remove the temp audio file after extracting it from the video
     os.remove(audio_path)
