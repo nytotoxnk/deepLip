@@ -5,3 +5,4 @@
 \contentsline {subsection}{\numberline {3.1}Task description}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Separation of work}{7}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Work Steps Overview}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Audio}{8}{subsection.3.4}%

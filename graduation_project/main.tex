@@ -220,4 +220,9 @@ CNN and Generative Adversial Networks (GANs) to create the lip movements that sy
 \subsection{Work Steps Overview}
 
 From the video we need to get the transcription in albanian, for this step several models were tried and tested although only the google cloud API were the best performing one. The next and easiest step to implement is translating the transcription to the target language, translation has come a long way and there are many tools which can achieve high accuracy, we decided to use googe translate. The following task is to take the translated transcript and use a voice cloning tool/model to make the voice dubbing. \textbf{There are several models availabe which have not been tested by me yet.} After this we have to use object tracking to track the mouth area in the video to then use the deep learning model for lip frame creation. \textbf{This depends heavily on the model the will be applied.}
+
+\subsection{Audio}
+
+The first step of the project is extracting audio from the videos, this was done using ffmpeg. Going by the suggestions of googles speech-to-text API best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless format.\\
+A simple test was done to check which specs were best suited for the videos we were creating for the dataset. These were all tested using googles speech-to-text API giving a confidence score for each of the tests. If we are going to do tests.\\  \textbf{Need to add the test results here. \\ Might need to split audio file into two mono files or downmix into one mono file.}
 \end{document}
