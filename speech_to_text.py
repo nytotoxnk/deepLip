@@ -22,13 +22,6 @@ def speech_to_text(path):
     audio_path = "temp_audio.wav"
     path.audio.write_audiofile(audio_path, fps=16000, logger=None)
 
-    # Need to write only to one file so this needs to be deleted and reworked, opening only one file and 
-    # writing new line with the name of the file it was transcribed first then the transcription itself
-    
-    # SAMPLE ROW
-    # video_file_1.mp4: Po perse more djale e bere kete gje jo te ndershme.
-
-    # Base name for the transcription file
     base_name = "transcription_alb.txt"
 
     try:
