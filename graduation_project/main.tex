@@ -225,4 +225,6 @@ From the video we need to get the transcription in albanian, for this step sever
 
 The first step of the project is extracting audio from the videos, this was done using ffmpeg. Going by the suggestions of googles speech-to-text API best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless format.\\
 A simple test was done to check which specs were best suited for the videos we were creating for the dataset. These were all tested using googles speech-to-text API giving a confidence score for each of the tests. If we are going to do tests.\\  \textbf{Need to add the test results here. \\ Might need to split audio file into two mono files or downmix into one mono file.}
+\\
+One group of audio files were made in a lossless format, signed 16bit PCM (linear16), 16000hz sampling rate. While the other folder, was made with the same codec but with 48000hz sampling rate.  
 \end{document}
