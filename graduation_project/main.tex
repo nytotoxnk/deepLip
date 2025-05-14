@@ -53,6 +53,7 @@
     \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
     %\fancyhead[L]{#1}% Add chapter title in Left header
 }
+
 % Colors
 \definecolor{istblue}{RGB}{3, 171, 230}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -222,9 +223,36 @@ CNN and Generative Adversial Networks (GANs) to create the lip movements that sy
 From the video we need to get the transcription in albanian, for this step several models were tried and tested although only the google cloud API were the best performing one. The next and easiest step to implement is translating the transcription to the target language, translation has come a long way and there are many tools which can achieve high accuracy, we decided to use googe translate. The following task is to take the translated transcript and use a voice cloning tool/model to make the voice dubbing. \textbf{There are several models availabe which have not been tested by me yet.} After this we have to use object tracking to track the mouth area in the video to then use the deep learning model for lip frame creation. \textbf{This depends heavily on the model the will be applied.}
 
 \subsection{Audio}
-
 The first step of the project is extracting audio from the videos, this was done using ffmpeg. Going by the suggestions of googles speech-to-text API best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless format.\\
 A simple test was done to check which specs were best suited for the videos we were creating for the dataset. These were all tested using googles speech-to-text API giving a confidence score for each of the tests. If we are going to do tests.\\  \textbf{Need to add the test results here. \\ Might need to split audio file into two mono files or downmix into one mono file.}
 \\
 One group of audio files were made in a lossless format, signed 16bit PCM (linear16), 16000hz sampling rate. While the other folder, was made with the same codec but with 48000hz sampling rate.  
+\\
+\subsection{Notes}
+
+The google api workflow was difficult to implement for it to work correctly and there were more lines of code to implement it than the other models. The accuracy of the API was not the best, but it was the only one that gave a confidence score for each of the tests. A new model made by Kushtrim Vioska, based on openai's whisper-large-v3-turbo and trained on 200 hours of albanian audio was able to transcribe the audio with a great accuracy, unfortuantely the model at this time does not have the weights opensource and was only able to be used through a gradio app which slowed down the process of transcribing the audio significantly. \\
+Going through the next step of the workflow we move from the transciption to the translation of the text, which can be done with high accuracy using a lot of different models which \textbf{need to be tested and researched more thoroughly}. \\
+Using the translated text into the language of our choice we can then try and use a voice cloning model to make the voice dubbing. A lot of models were available for this task, Nari Labs released Dia, in 22nd April 2025, coqui-ai, which a lot of other models are based on. 
+A paper in 5th of May 2025 was released by \textbf{Yemin Shi et al. Voila: Voice-Language Foundation Models for Real-Time Autonomous Interaction and Voice Role-Play} which created a foundation model for realt-time autonomous interaction and voice role-play. https://arxiv.org/abs/2505.02707. 
+
+\subsection{Studying the literature}
+There are a lot of models and papers which have been made for the task of lip-synchronization, but most of them are focused on english and other high resource languages. Pawar, D. et al. (2024) used Generative Adversarial Networks (GANs), using both audio and visual features techiques like MFCCs and VGG-M-based CNNs to achieve accurate lip-synchronization. \cite{PAWAR2024100084} shows some of the models using GANs as their architecture.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Model} & \textbf{Architecture} & \textbf{Performance} \\
+        \hline
+        \textbf{GANs} & \textbf{Discriminator Network} & \textbf{Generator Network} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+\bibliography{references}
+\bibliographystyle{plain}
+
 \end{document}

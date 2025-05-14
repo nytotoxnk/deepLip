@@ -6,3 +6,5 @@
 \contentsline {subsection}{\numberline {3.2}Separation of work}{7}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Work Steps Overview}{8}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Audio}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Notes}{8}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Studying the literature}{9}{subsection.3.6}%

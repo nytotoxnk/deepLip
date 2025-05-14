@@ -1,6 +1,14 @@
 # Fdb version 4
-["pdflatex"] 1746821617.67555 "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" "main.pdf" "main" 1746821618.60658 0
-  "C:/Users/aldo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1746812984 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+["bibtex main"] 1747255268.18171 "main.aux" "main.bbl" "main" 1747255269.72885 0
+  "./references.bib" 1747254993 1734 284c4f22a59cdc2ea9f8735449011ba0 ""
+  "C:/Users/aldo/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
+  "main.aux" 1747255269 1467 70371237a483043e7d2301ff05de8810 "pdflatex"
+  (generated)
+  "main.bbl"
+  "main.blg"
+  (rewritten before read)
+["pdflatex"] 1747255268.41242 "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" "main.pdf" "main" 1747255269.72936 0
+  "C:/Users/aldo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1747255101 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/aldo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1745676456 13147729 5858f4cd12e7fe8efc993cb2b1791c45 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -20,10 +28,12 @@
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
+  "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti12.tfm" 1136765053 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
+  "C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247596667 36118 fad905eba93cff5bce1e185fe980a177 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/generic/atbegshi/atbegshi.sty" 1575571100 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1743097073 144118 8a0145ee10f36c9987d52d114dccd1b1 ""
@@ -119,11 +129,12 @@
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/latex/varwidth/varwidth.sty" 1238469540 10894 d359a13923460b2a73d4312d613554c8 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" 1746821617 15709 66f7eec802cac7bec0f79b1b81e4361f ""
-  "main.aux" 1746821618 1130 589915d5b33db0605fef38a445e50c0b "pdflatex"
-  "main.out" 1746821618 842 ec882df884ebb990e97b512cb10b533c "pdflatex"
-  "main.tex" 1746821617 15709 66f7eec802cac7bec0f79b1b81e4361f ""
-  "main.toc" 1746821618 556 2dd593789728c3d26c28f932a0d876f8 "pdflatex"
+  "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" 1747255264 18045 834872a138b989dce6e44f06985ad79b ""
+  "main.aux" 1747255269 1467 70371237a483043e7d2301ff05de8810 "pdflatex"
+  "main.bbl" 1747255268 297 d4e7eb31434e2d307cedc32c7349f23c "bibtex main"
+  "main.out" 1747255269 1102 b25ac82db3ede499900f002a9d1490a8 "pdflatex"
+  "main.tex" 1747255264 18045 834872a138b989dce6e44f06985ad79b ""
+  "main.toc" 1747255269 716 5305c0d4c75ab20d1e5b489a1cddffcb "pdflatex"
   (generated)
   "main.aux"
   "main.log"
