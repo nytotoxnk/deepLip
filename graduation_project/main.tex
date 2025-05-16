@@ -230,13 +230,15 @@ One group of audio files were made in a lossless format, signed 16bit PCM (linea
 \\
 \subsection{Notes}
 
-The google api workflow was difficult to implement for it to work correctly and there were more lines of code to implement it than the other models. The accuracy of the API was not the best, but it was the only one that gave a confidence score for each of the tests. A new model made by Kushtrim Vioska, based on openai's whisper-large-v3-turbo and trained on 200 hours of albanian audio was able to transcribe the audio with a great accuracy, unfortuantely the model at this time does not have the weights opensource and was only able to be used through a gradio app which slowed down the process of transcribing the audio significantly. \\
+The google api workflow was difficult to implement for it to work correctly and there were more lines of code to implement it than the other models. The accuracy of the API was not the best, but it was the only one that gave a confidence score for each of the tests. A new model made by Kushtrim Vioska, based on openai's whisper-large-v3-turbo and trained on 200 hours of albanian audio was able to transcribe the audio with a great accuracy, unfortuantely the model at this time does not have the weights open source and was only able to be used through a gradio app which slowed down the process of transcribing the audio significantly and the resources of the huggingface model are volitale because of the amount of requests it gets.\\
 Going through the next step of the workflow we move from the transciption to the translation of the text, which can be done with high accuracy using a lot of different models which \textbf{need to be tested and researched more thoroughly}. \\
 Using the translated text into the language of our choice we can then try and use a voice cloning model to make the voice dubbing. A lot of models were available for this task, Nari Labs released Dia, in 22nd April 2025, coqui-ai, which a lot of other models are based on. 
-A paper in 5th of May 2025 was released by \textbf{Yemin Shi et al. Voila: Voice-Language Foundation Models for Real-Time Autonomous Interaction and Voice Role-Play} which created a foundation model for realt-time autonomous interaction and voice role-play. https://arxiv.org/abs/2505.02707. 
+A paper in 5th of May 2025 was released by \textbf{Yemin Shi et al. Voila: Voice-Language Foundation Models for Real-Time Autonomous Interaction and Voice Role-Play} which created a foundation model for realt-time autonomous interaction and voice role-play. https://arxiv.org/abs/2505.02707. \\
+\textbf{It can be posisble to make a comparison system between the google API and the Kushtrim Vioska model to see how much do they match. Not sure what we can achieve with this. Google API does give us a confidence score for each of the tests. We can probably use this to see how much the model is confident in the transcription and then use that to our advantage. If we also use the word confidence we can then compare to see if Kushtrims model made a different transcription, whenever the confidence is low we can use Kushtrims model to make a transcription.}\\
 
 \subsection{Studying the literature}
-There are a lot of models and papers which have been made for the task of lip-synchronization, but most of them are focused on english and other high resource languages. Pawar, D. et al. (2024) used Generative Adversarial Networks (GANs), using both audio and visual features techiques like MFCCs and VGG-M-based CNNs to achieve accurate lip-synchronization. \cite{PAWAR2024100084} shows some of the models using GANs as their architecture.
+There are a lot of models and papers which have been made for the task of lip-synchronization, but most of them are focused on english and other high resource languages. Pawar, D. et al. (2024) used Generative Adversarial Networks (GANs), using both audio and visual features techiques like MFCCs and VGG-M-based CNNs to achieve accurate lip-synchronization. \cite{PAWAR2024100084} shows some of the models using GANs as their architecture. \cite{Li_2021} used a combination of a deep neural network with one dimension and a Long Short-Term Memory (LSTM) to generate a face model from speech input.\\
+Traditionally, methods required highly controlled and precisely aligned datasets, making them less flexible and scalable for diverse inputs. Newer approaches aim to reduce this dependency. 
 
 \begin{table}[h]
     \centering
@@ -246,11 +248,10 @@ There are a lot of models and papers which have been made for the task of lip-sy
         \hline
         \textbf{GANs} & \textbf{Discriminator Network} & \textbf{Generator Network} \\
         \hline
+        \textbf{GANs} & \textbf{Discriminator Network} & \textbf{Generator Network} \\
+        \hline
     \end{tabular}
 \end{table}
-
-
-
 
 \bibliography{references}
 \bibliographystyle{plain}
