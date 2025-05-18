@@ -249,18 +249,20 @@ List of questions:
     \item How are voice cloning models evaluated, as it feels like it should be done with a human evaluation and that is faulty most of the time?
     \item Which would be the best model for the lip-synchronization task based on the data we have?
 \end{itemize}
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|c|c|c|}
-        \hline
-        \textbf{Model} & \textbf{Architecture} & \textbf{Performance} \\
-        \hline
-        \textbf{GANs} & \textbf{Discriminator Network} & \textbf{Generator Network} \\
-        \hline
-        \textbf{GANs} & \textbf{Discriminator Network} & \textbf{Generator Network} \\
-        \hline
-    \end{tabular}
-\end{table}
+AS for the optimal length of the video chunks, the study done by \cite{PAWAR2024100084} faced challanges with lengthy continuous speech, inlcuding time-consuming merging issues and potential overfitting. This was addressed by using the "vVISWA" dataset which contains isolated words or indepentent speech. This improved the performance of the model a lot and reduced overfitting.
+
+
+List of challanges:
+\begin{itemize}
+    \item Low resources for the datasets in albanian, in video and audio.
+    \item No open source models for the transcription of the audio from albanian.
+    \item Voice cloning models being evaluated using a human evaluation and that is biased.
+    \item Storage of data, both in the cloud and locally.
+    \item Computing power.
+    \item Training time?
+    \item 
+\end{itemize}
+
 
 \bibliography{references}
 \bibliographystyle{plain}
