@@ -8,3 +8,4 @@
 \contentsline {subsection}{\numberline {3.4}Audio}{8}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Notes}{8}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Studying the literature}{9}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Questions raised}{9}{subsection.3.7}%

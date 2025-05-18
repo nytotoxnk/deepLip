@@ -1,5 +1,12 @@
 \begin{thebibliography}{1}
 
+\bibitem{Li_2021}
+Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
+\newblock A novel speech-driven lip-sync model with cnn and lstm.
+\newblock In {\em 2021 14th International Congress on Image and Signal
+  Processing, BioMedical Engineering and Informatics (CISP-BMEI)}, page 1–6.
+  IEEE, October 2021.
+
 \bibitem{PAWAR2024100084}
 Diksha Pawar, Prashant Borde, and Pravin Yannawar.
 \newblock Generating dynamic lip-syncing using target audio in a multimedia
