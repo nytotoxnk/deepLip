@@ -37,36 +37,22 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
                                (default: 1000 ms = 1 second).
         silence_thresh (int): Silence threshold in dBFS (default: -40 dBFS).
     """
+    base_name = os.path.basename(video_path).split(".")[0]
+    print(f" ------------------- Base name: {base_name}")
     # Ensure directories exist
     os.makedirs(output_dir, exist_ok=True)
 
+    audio_folder = "full_length_extracted_audios"
     # Extract audio for silence detection
-    temp_audio_path = os.path.join(output_dir, "temp_audio.wav") # Save temp file in output dir
-    print(f"Extracting audio to {temp_audio_path}...")
-    try:
-         # Using ffmpeg directly via subprocess for audio extraction
-         audio_extract_cmd = [
-             'ffmpeg', '-i', video_path, '-vn', # -vn means no video
-             '-acodec', 'pcm_wav', # Output as PCM WAV
-             '-ar', '16000', # Recommended sample rate for pydub compatibility and smaller file size
-             '-ac', '1', # Mono audio
-             '-y', # Overwrite output file without asking
-             temp_audio_path
-         ]
-         subprocess.run(audio_extract_cmd, check=True, capture_output=True, text=True)
-         print("Audio extracted successfully.")
-    except subprocess.CalledProcessError as e:
-        print(f"Error extracting audio: {e}")
-        print(f"Error output: {e.stderr}")
-        return # Exit if audio extraction fails
+    temp_audio_path = f"{audio_folder}/{base_name}.wav"
+    print(f"\n\n ------------------- Extracting audio to {temp_audio_path}...")
 
     # Load audio with pydub
     try:
         audio = AudioSegment.from_wav(temp_audio_path)
         print(f"Audio loaded, duration: {len(audio)} ms")
     except Exception as e:
-        print(f"Error loading audio file {temp_audio_path}: {e}")
-        os.remove(temp_audio_path) # Clean up temp file
+        print(f"Error loading audio file {temp_audio_path}: {e}")# Clean up temp file
         return
 
     # Detect silent chunks longer than min_silence_len
@@ -248,56 +234,9 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
         print(f"Cleaned up temporary audio file {temp_audio_path}")
     print("Done splitting the video.")
 
-# Example Usage (assuming you have a video file and the extract_audio function)
-# if __name__ == "__main__":
-#     # You would need to define or import your extract_audio function here
-#     def extract_audio(video_path, audio_path):
-#          try:
-#              cmd = ['ffmpeg', '-i', video_path, '-vn', '-acodec', 'pcm_wav', '-ar', '16000', '-ac', '1', '-y', audio_path]
-#              subprocess.run(cmd, check=True, capture_output=True, text=True)
-#              print(f"Extracted audio from {video_path} to {audio_path}")
-#          except subprocess.CalledProcessError as e:
-#              print(f"Error extracting audio for function test: {e.stderr}")
-#              raise # Re-raise the exception
-
-#     # Ensure ffmpeg and ffprobe are in your PATH
-#     # Install pydub: pip install pydub
-#     # pydub requires ffmpeg installed separately
-
-#     # Replace with your actual video file path
-#     input_video = "your_video.mp4"
-#     output_directory = "output_chunks"
-
-#     if os.path.exists(input_video):
-#          split_video_on_silence(input_video, output_directory)
-#     else:
-#          print(f"Input video not found: {input_video}")
-
-
-def extract_audio(video_path, output_path):
-    """Extract audio from video using FFmpeg"""
-    try:
-        command = [
-            'ffmpeg',
-            '-i', video_path,
-            '-vn',  # No video
-            '-acodec', 'pcm_s16le',  # Audio codec
-            '-ar', '16000',  # Sample rate
-            '-ac', '1',  # Number of channels
-            '-y',  # Overwrite output
-            output_path
-        ]
-        
-        result = subprocess.run(command, check=True, capture_output=True, text=True)
-        print(f"Audio extracted successfully to {output_path}")
-        
-    except subprocess.CalledProcessError as e:
-        print(f"Error extracting audio: {e}")
-        print(f"FFmpeg error output: {e.stderr}")
-        raise
 
 if __name__ == "__main__":
-    video_path = os.path.normpath('videos/')
+    video_path = os.path.normpath('videos/20250516_223221.mp4')
     output_dir = 'prepared_dataset'
     
     # Check if ffmpeg is available
@@ -313,4 +252,5 @@ if __name__ == "__main__":
         exit(1)
     
     print(f"Found video file, proceeding with splitting")
+    
     split_video_on_silence(video_path, output_dir)
