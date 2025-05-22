@@ -106,10 +106,29 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
                       last_cut_time = s_stop
                       print(f"Adding cut at suitable silence after forced cut: {s_stop} ms")
 
+    # --- NEW LOGIC TO HANDLE REMAINDER ---
+    # After the main silence processing loop, ensure that the segment from the
+    # last determined cut point (cuts[-1]) to the end of the audio (audio_length)
+    # is also broken down if it exceeds max_chunk_length.
+    if audio_length > 0 and cuts: # Defensive checks; cuts should always have at least [0]
+        while (audio_length - cuts[-1]) > max_chunk_length:
+            # If the remaining segment is too long, add another cut.
+            # This cut is max_chunk_length from the previous one.
+            next_cut_point = cuts[-1] + max_chunk_length
+            # Since (audio_length - cuts[-1]) > max_chunk_length,
+            # it implies audio_length > cuts[-1] + max_chunk_length,
+            # so next_cut_point will be < audio_length.
+            cuts.append(next_cut_point)
+            print(f"Forcing cut for long remainder at: {next_cut_point} ms. Current cuts: {cuts}")
 
     # Ensure the last cut point is the end of the audio if it hasn't been added yet
-    if cuts[-1] < audio_length:
-        cuts.append(audio_length)
+    if cuts and audio_length > 0 : # Adding checks for cuts not being empty
+        if cuts[-1] < audio_length:
+            cuts.append(audio_length)
+    elif not cuts and audio_length > 0 : # Should not happen if cuts = [0] initially
+        cuts = [0, audio_length]
+    elif audio_length == 0 and (not cuts or cuts != [0]): # Ensure for 0-length audio, cuts is [0]
+        cuts = [0]
 
     # Filter out consecutive identical cut points
     unique_cuts = [cuts[0]]
@@ -133,7 +152,7 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
         start_sec = start_ms / 1000.0
         duration_sec = duration_ms / 1000.0
 
-        out_path = os.path.join(output_dir, f"chunk_{i+1:03d}.mp4")
+        out_path = os.path.join(output_dir, f"{base_name}_chunk_{i+1:03d}.mp4")
         print(f"Creating chunk {i+1}: {start_sec:.2f}s to {end_ms/1000.0:.2f}s (duration: {duration_sec:.2f}s)")
 
         # Direct ffmpeg command for accurate splitting (-ss after -i)
@@ -164,7 +183,6 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
         #     '-y',
         #     out_path
         # ]
-
 
         try:
             # Try copying streams first
@@ -224,15 +242,7 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
             except subprocess.CalledProcessError as e_fallback:
                  print(f"Fatal Error: Failed to create chunk {i+1} even with re-encoding: {e_fallback}")
                  print(f"Error output (re-encoding attempt): {e_fallback.stderr}")
-                 # Decide if you want to stop or continue with the next chunk
                  continue # Continue to the next chunk
-
-
-    # Clean up temp files
-    if os.path.exists(temp_audio_path):
-        os.remove(temp_audio_path)
-        print(f"Cleaned up temporary audio file {temp_audio_path}")
-    print("Done splitting the video.")
 
 
 if __name__ == "__main__":

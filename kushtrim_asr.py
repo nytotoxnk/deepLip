@@ -18,6 +18,8 @@ transcription = result['text']
 print(transcription)
 
 """
+
+
 # Going through all the files in folder, transcribing them and writing to file.
 for file in os.listdir('extracted_audios'):
 	

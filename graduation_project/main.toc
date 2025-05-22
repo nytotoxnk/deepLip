@@ -2,10 +2,11 @@
 \contentsline {section}{\numberline {1}Abstract}{3}{section.1}%
 \contentsline {section}{\numberline {2}Acknowledgements}{4}{section.2}%
 \contentsline {section}{\numberline {3}Introduction}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Task description}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Separation of work}{7}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Work Steps Overview}{8}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Audio}{8}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Notes}{8}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Studying the literature}{9}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Questions raised}{9}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.1}Background of the study}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}How lip synchronization works}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Methodology}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Work Steps Overview}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Audio}{8}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Notes}{9}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Studying the literature}{9}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Questions raised}{10}{subsection.3.8}%
