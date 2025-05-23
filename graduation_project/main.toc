@@ -8,5 +8,5 @@
 \contentsline {subsection}{\numberline {3.4}Work Steps Overview}{8}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Audio}{8}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Notes}{9}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Studying the literature}{9}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.7}Studying the literature}{10}{subsection.3.7}%
 \contentsline {subsection}{\numberline {3.8}Questions raised}{10}{subsection.3.8}%

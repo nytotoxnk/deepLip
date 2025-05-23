@@ -199,9 +199,9 @@ def main():
             audio_channel_count=2    # Adjust if mono or different channel count
         ),
         features=cloud_speech.RecognitionFeatures(
-            enable_word_confidence=True,
-            enable_word_time_offsets=True,
-            # enable_automatic_punctuation=True, # Consider adding
+            enable_word_confidence=True, # could be used to give it to a NLP later on for analysis, look at words with less confidence. 
+            enable_word_time_offsets=True, # Will be used later on for the chunking of videos based on timmings
+            enable_automatic_punctuation=True, 
             # diarization_config=cloud_speech.SpeakerDiarizationConfig( # Optional: if you need speaker labels
             #     min_speaker_count=1,
             # ),

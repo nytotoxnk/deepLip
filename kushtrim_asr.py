@@ -19,20 +19,18 @@ print(transcription)
 
 """
 
-
 # Going through all the files in folder, transcribing them and writing to file.
-for file in os.listdir('extracted_audios'):
+for file in os.listdir('prepared_dataset_audio'):
 	
-	file_path = os.path.join('extracted_audios', file)
+	file_path = os.path.join('prepared_dataset_audio', file)
 
 	client = Client("Kushtrim/whisper-large-v3-turbo-shqip")
 	result = client.predict(
 		inputs=handle_file(file_path),
 		api_name="/predict_1"
 	)
-	transcription = result['text']
-	print(transcription)
+	print("Transcription: " + result)
 	
 	# Append transcription to file
-	with open('transcription_alb.txt', 'a') as f:
-		f.write(f"{file}:{transcription}\n")
+	with open('transcription_alb.txt', 'a', encoding="utf-8") as f:
+		f.write(f"{file}:{result}\n")

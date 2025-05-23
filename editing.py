@@ -246,7 +246,7 @@ def split_video_on_silence(video_path, output_dir, max_chunk_length=55000, min_s
 
 
 if __name__ == "__main__":
-    video_path = os.path.normpath('videos/20250516_223221.mp4')
+    video_path = os.path.normpath('videos/20250429_130924.mp4')
     output_dir = 'prepared_dataset'
     
     # Check if ffmpeg is available

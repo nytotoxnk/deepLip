@@ -244,7 +244,7 @@ Using the translated text into the language of our choice we can then try and us
 A paper in 5th of May 2025 was released by \textbf{Yemin Shi et al. Voila: Voice-Language Foundation Models for Real-Time Autonomous Interaction and Voice Role-Play} which created a foundation model for realt-time autonomous interaction and voice role-play. https://arxiv.org/abs/2505.02707. \\
 \textbf{It can be posisble to make a comparison system between the google API and the Kushtrim Vioska model to see how much do they match. Not sure what we can achieve with this. Google API does give us a confidence score for each of the tests. We can probably use this to see how much the model is confident in the transcription and then use that to our advantage. If we also use the word confidence we can then compare to see if Kushtrims model made a different transcription, whenever the confidence is low we can use Kushtrims model to make a transcription.}\\
 Additionaly, \cite{PAWAR2024100084} used "vVISWA" dataset which hade isolated words or independent speech, which worked great in combining the audio and video in the trainning set, and according to them reducing overfitting due to its inherent data augmentation effect.
-
+\newpage
 \subsection{Studying the literature}
 There are a lot of models and papers which have been made for the task of lip-synchronization, but most of them are focused on english and other high resource languages. Pawar, D. et al. (2024) used Generative Adversarial Networks (GANs), using both audio and visual features techiques like MFCCs and VGG-M-based CNNs to achieve accurate lip-synchronization. \cite{PAWAR2024100084} shows some of the models using GANs as their architecture. \cite{Li_2021} used a combination of a deep neural network with one dimension and a Long Short-Term Memory (LSTM) to generate a face model from speech input.\\
 Traditionally, methods required highly controlled and precisely aligned datasets, making them less flexible and scalable for diverse inputs. Newer approaches aim to reduce this dependency. 
@@ -259,6 +259,7 @@ List of questions:
     \item How does the duration of video chunks used during preprocessing impact the performance of the final machine learning model, and what chunk length yields the best trade-off between information retention and computational efficiency?
     \item How are voice cloning models evaluated, as it feels like it should be done with a human evaluation and that is faulty most of the time?
     \item Which would be the best model for the lip-synchronization task based on the data we have?
+    \item Best way to handle differences between original audio timing and the voice cloned sample timing. (slow down the voice? speedup)
 \end{itemize}
 AS for the optimal length of the video chunks, the study done by \cite{PAWAR2024100084} faced challanges with lengthy continuous speech, inlcuding time-consuming merging issues and potential overfitting. This was addressed by using the "vVISWA" dataset which contains isolated words or indepentent speech. This improved the performance of the model a lot and reduced overfitting.
 
@@ -270,10 +271,29 @@ List of challanges:
     \item Voice cloning models being evaluated using a human evaluation and that is biased.
     \item Storage of data, both in the cloud and locally.
     \item Computing power.
-    \item Training time?
-    \item 
+    \item Training time.
+    \item If the spoken albanian is with a heavy dialect, an Albanian ASR trained with large number dialects is needed
+    \item If the cutting of videos is not done correctly, it is possible to cut a word in half
+    \item Translating the transcribed albanian dialect. How possible it is? NLP script transformation + translate*
+    \item Voice cloning emotions.
+    \item Video chunking first then transcription, or transcription (have to keep timings) then chunking - might be more possible and more cost effective than the NLP to find the problems in the language/chunked words but not for dialects.
+    \item Could probably use the timings from google speech-to-text api to make the cuts since it offers that. Making the better option to be transcript first then cut/chunk second.  
+    \item Multiple Ethical challanges
 \end{itemize}
 
+List of improvements:
+\begin{itemize}
+    \item Better dataset, quantity and quality, diversity (age, gender, moustache, skin color, lip color- lipstick, ethnicity, also in this case, dialect)
+    \item Separation of dataset into single word video for better model performance.
+    \item Albanian ASR open-source model, google speech-to-text API is paid service, and Kushtrims uses huggingface spaces which is slow
+    \item Comparison between Google Speech-to-text API and Kushtrim ASR
+    \item Addition on an NLP to handle transcription errors
+    \item NLP for dialect speech, to transform it into something that can be translated, maybe LLM is better in this case.
+    \item Better voice cloning. More emotional expression
+    \item Better face reproduction from the emotions of the voice clone.
+    \item Real time lip-synch dubbing
+    \item Separating the dataset into two groups the new dataset with videos close to one word per video and see the results of that and the original dataset with longer videos. 
+\end{itemize}
 
 \bibliography{references}
 \bibliographystyle{plain}
