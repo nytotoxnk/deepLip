@@ -19,11 +19,30 @@ print(transcription)
 
 """
 
-# Going through all the files in folder, transcribing them and writing to file.
-for file in os.listdir('prepared_dataset_audio'):
-	
-	file_path = os.path.join('prepared_dataset_audio', file)
+# Read already processed files from the transcription file
+processed_files = set()
+transcription_file = 'transcription_alb_long_audio_kushtrim.txt'
 
+if os.path.exists(transcription_file):
+	with open(transcription_file, 'r', encoding="utf-8") as f:
+		for line in f:
+			if ':' in line:
+				filename = line.split(':', 1)[0]
+				processed_files.add(filename)
+
+print(f"Found {len(processed_files)} already processed files")
+
+# Going through all the files in folder, transcribing them and writing to file.
+for file in os.listdir('full_length_extracted_audio'):
+	
+	# Skip files that have already been processed
+	if file in processed_files:
+		print(f"Skipping {file} - already processed")
+		continue
+	
+	file_path = os.path.join('full_length_extracted_audio', file)
+
+	print(f"Processing {file}...")
 	client = Client("Kushtrim/whisper-large-v3-turbo-shqip")
 	result = client.predict(
 		inputs=handle_file(file_path),
@@ -32,5 +51,5 @@ for file in os.listdir('prepared_dataset_audio'):
 	print("Transcription: " + result)
 	
 	# Append transcription to file
-	with open('transcription_alb.txt', 'a', encoding="utf-8") as f:
+	with open(transcription_file, 'a', encoding="utf-8") as f:
 		f.write(f"{file}:{result}\n")

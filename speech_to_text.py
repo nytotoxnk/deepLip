@@ -16,18 +16,24 @@ RECOGNIZER_ID = "albanian-recogniser" # The recogniser ID
 # GCS Configuration
 YOUR_BUCKET_NAME = "speech-to-text-albanian"
 
-YOUR_LOCAL_AUDIO_FOLDER = r"extracted_audios"
+YOUR_LOCAL_AUDIO_FOLDER = r"full_length_extracted_audio"
 
-YOUR_GCS_UPLOAD_FOLDER = "audio-files/batch_uploads"
+YOUR_GCS_UPLOAD_FOLDER = "audio-files"
 
-YOUR_GCS_OUTPUT_PARENT_FOLDER = f"gs://{YOUR_BUCKET_NAME}/transcripts/batch_output"
+YOUR_GCS_OUTPUT_PARENT_FOLDER = f"gs://{YOUR_BUCKET_NAME}/transcripts"
 
-OUTPUT_TEXT_FILE = "transcription_alb.txt"
+OUTPUT_TEXT_FILE = "google_transcription_alb.txt"
+
+# Local folder for downloading JSON transcription files
+TRANSCRIPTIONS_JSON_FOLDER = "transcriptions_json"
+
+# Batch processing settings
+BATCH_SIZE = 5  # Process 5 files at a time
 
 # Recognizer and Operation settings
 RECOGNIZER_NAME = f"projects/{PROJECT_ID}/locations/{LOCATION}/recognizers/{RECOGNIZER_ID}"
 
-OPERATION_TIMEOUT_SECS = 6 * 60 * 60 # 6 hours
+OPERATION_TIMEOUT_SECS = 2 * 60 * 60 # 2 hours (reduced for smaller batches)
 
 # --- Client Initialization ---
 try:
@@ -51,6 +57,11 @@ def upload_audio_to_gcs(bucket_name, local_file_path, gcs_destination_prefix):
             destination_blob_name = file_name
 
         blob = bucket.blob(destination_blob_name)
+
+        # Check if file already exists
+        if blob.exists():
+            print(f"File already exists at gs://{bucket_name}/{destination_blob_name}, skipping upload")
+            return f"gs://{bucket_name}/{destination_blob_name}"
 
         print(f"Uploading {local_file_path} to gs://{bucket_name}/{destination_blob_name}")
         blob.upload_from_filename(local_file_path)
@@ -90,7 +101,19 @@ def get_transcript_from_specific_json_uri(json_gcs_uri, storage_client):
             print(f"Error: Results JSON file not found at {json_gcs_uri}")
             return None, None
 
-        results_json_str = blob.download_as_text(client=storage_client, encoding='utf-8')
+        # Create transcriptions_json folder if it doesn't exist
+        os.makedirs(TRANSCRIPTIONS_JSON_FOLDER, exist_ok=True)
+        
+        # Download JSON file to local folder
+        json_filename = os.path.basename(blob_name)
+        local_json_path = os.path.join(TRANSCRIPTIONS_JSON_FOLDER, json_filename)
+        
+        print(f"Downloading JSON file to: {local_json_path}")
+        blob.download_to_filename(local_json_path)
+        
+        # Read and parse the downloaded JSON file
+        with open(local_json_path, 'r', encoding='utf-8') as f:
+            results_json_str = f.read()
         results_data = json.loads(results_json_str)
 
         full_transcript_parts = []
@@ -136,11 +159,22 @@ def get_transcript_from_specific_json_uri(json_gcs_uri, storage_client):
         print(f"An unexpected error occurred when processing results file {json_gcs_uri}: {e}")
         return None, None
 
+# --- Function to list files in GCS bucket ---
+def list_gcs_files(bucket_name, prefix=""):
+    """List files in GCS bucket with optional prefix."""
+    try:
+        bucket = storage_client.bucket(bucket_name)
+        blobs = bucket.list_blobs(prefix=prefix)
+        return [f"gs://{bucket_name}/{blob.name}" for blob in blobs if not blob.name.endswith('/')]
+    except Exception as e:
+        print(f"Error listing GCS files: {e}")
+        return []
 
-def main():
-    print("--- Starting Batch Audio Transcription Process ---")
-
-    # 1. Identify audio files in the local folder
+# --- Function to upload files only ---
+def upload_files_only():
+    """Upload audio files to GCS without transcription."""
+    print("--- Uploading Audio Files to GCS Only ---")
+    
     audio_files_to_upload = []
     try:
         print(f"Scanning for audio files in: {YOUR_LOCAL_AUDIO_FOLDER}")
@@ -149,7 +183,6 @@ def main():
                 local_file_path = os.path.join(YOUR_LOCAL_AUDIO_FOLDER, item)
                 if os.path.isfile(local_file_path):
                     audio_files_to_upload.append(local_file_path)
-    
     except FileNotFoundError:
         print(f"Error: Local audio folder not found at {YOUR_LOCAL_AUDIO_FOLDER}")
         return
@@ -161,14 +194,9 @@ def main():
         print(f"No audio files found in {YOUR_LOCAL_AUDIO_FOLDER} to process.")
         return
     
-    print(f"Found {len(audio_files_to_upload)} audio files to process.")
+    print(f"Found {len(audio_files_to_upload)} audio files to upload.")
 
-    # 2. Upload all audio files to GCS
-    # uploaded_file_info_map: GCS URI -> original_base_name
-    uploaded_file_info_map = {}
-    gcs_uris_for_batch_request = []
-
-    print("\n--- Uploading Audio Files to GCS ---")
+    uploaded_count = 0
     for local_file_path in audio_files_to_upload:
         gcs_uri = upload_audio_to_gcs(
             YOUR_BUCKET_NAME,
@@ -176,38 +204,31 @@ def main():
             YOUR_GCS_UPLOAD_FOLDER
         )
         if gcs_uri:
-            base_name = os.path.basename(local_file_path)
-            uploaded_file_info_map[gcs_uri] = base_name
-            gcs_uris_for_batch_request.append(gcs_uri)
-        else:
-            print(f"Skipping {local_file_path} due to upload failure.")
+            uploaded_count += 1
 
-    if not gcs_uris_for_batch_request:
-        print("No files were successfully uploaded. Cannot proceed with transcription.")
-        return
-    print(f"\nSuccessfully uploaded {len(gcs_uris_for_batch_request)} files to GCS.")
+    print(f"Upload completed. {uploaded_count} files processed.")
 
-    # 3. Prepare and run the batch transcription request
-    print("\n--- Preparing Batch Transcription Request ---")
-    all_file_metadata = [cloud_speech.BatchRecognizeFileMetadata(uri=uri) for uri in gcs_uris_for_batch_request]
+# --- Function to process batch transcription ---
+def process_batch_transcription(gcs_uris_batch, uploaded_file_info_map):
+    """Process a batch of files for transcription."""
+    print(f"\n--- Processing batch of {len(gcs_uris_batch)} files ---")
+    
+    all_file_metadata = [cloud_speech.BatchRecognizeFileMetadata(uri=uri) for uri in gcs_uris_batch]
 
-    # Define RecognitionConfig (ensure these settings are correct for your audio)
+    # Define RecognitionConfig
     recognition_config = cloud_speech.RecognitionConfig(
         explicit_decoding_config=cloud_speech.ExplicitDecodingConfig(
-            encoding=cloud_speech.ExplicitDecodingConfig.AudioEncoding.LINEAR16, # Assuming WAV/LINEAR16
-            sample_rate_hertz=16000, # Adjust if your audio has a different sample rate
-            audio_channel_count=2    # Adjust if mono or different channel count
+            encoding=cloud_speech.ExplicitDecodingConfig.AudioEncoding.LINEAR16,
+            sample_rate_hertz=16000,
+            audio_channel_count=2
         ),
         features=cloud_speech.RecognitionFeatures(
-            enable_word_confidence=True, # could be used to give it to a NLP later on for analysis, look at words with less confidence. 
-            enable_word_time_offsets=True, # Will be used later on for the chunking of videos based on timmings
-            enable_automatic_punctuation=True, 
-            # diarization_config=cloud_speech.SpeakerDiarizationConfig( # Optional: if you need speaker labels
-            #     min_speaker_count=1,
-            # ),
+            enable_word_confidence=True,
+            enable_word_time_offsets=True,
+            enable_automatic_punctuation=True,
         ),
-        model="chirp_2", # Using the Chirp model
-        language_codes=["sq-AL"], # Albanian
+        model="chirp_2",
+        language_codes=["sq-AL"],
     )
 
     recognition_output_config = cloud_speech.RecognitionOutputConfig(
@@ -221,31 +242,31 @@ def main():
         recognition_output_config=recognition_output_config,
     )
 
-    print(f"Submitting batch transcription request for {len(all_file_metadata)} files to recognizer {RECOGNIZER_NAME}.")
-    print(f"Output will be stored under GCS path: {YOUR_GCS_OUTPUT_PARENT_FOLDER}")
+    print(f"Submitting batch transcription request for {len(all_file_metadata)} files.")
 
     try:
         operation = speech_client.batch_recognize(request=batch_request)
         print(f"Waiting for batch operation to complete (timeout: {OPERATION_TIMEOUT_SECS} seconds)...")
-        response = operation.result(timeout=OPERATION_TIMEOUT_SECS) # This is a BatchRecognizeResponse
+        response = operation.result(timeout=OPERATION_TIMEOUT_SECS)
         print("Batch transcription operation completed.")
 
-        # 4. Process results and save to text file
-        print(f"\n--- Processing Transcription Results and Saving to {OUTPUT_TEXT_FILE} ---")
-        with open(OUTPUT_TEXT_FILE, 'w', encoding='utf-8') as outfile:
+        # Process results and save to text file
+        print(f"--- Processing Transcription Results ---")
+        processed_files_count = 0
+        
+        with open(OUTPUT_TEXT_FILE, 'a', encoding='utf-8') as outfile:
             if response and response.results:
-                processed_files_count = 0
                 for input_audio_gcs_uri, file_result in response.results.items():
                     original_base_name = uploaded_file_info_map.get(input_audio_gcs_uri, os.path.basename(input_audio_gcs_uri))
 
                     if file_result.error and file_result.error.message:
-                        print(f"Error for '{original_base_name}': {file_result.error.message} (Code: {file_result.error.code})")
+                        print(f"Error for '{original_base_name}': {file_result.error.message}")
                         outfile.write(f"{original_base_name}:ERROR_API:{file_result.error.message}\n")
                         continue
 
                     result_json_gcs_uri = file_result.uri
                     if not result_json_gcs_uri:
-                        print(f"No result URI found for '{original_base_name}', though no explicit API error reported.")
+                        print(f"No result URI found for '{original_base_name}'")
                         outfile.write(f"{original_base_name}:ERROR_NO_URI:Transcription result URI missing\n")
                         continue
 
@@ -256,33 +277,125 @@ def main():
                     )
 
                     if transcript_text is not None:
-                        confidence_str = f"{confidence:.4f}" if isinstance(confidence, float) else str(confidence if confidence is not None else "N/A")
-                        output_line = f"{original_base_name}:{confidence_str}:{transcript_text}\n"
+                        output_line = f"{original_base_name}:{transcript_text}\n"
                         outfile.write(output_line)
                         print(f"Saved transcription for '{original_base_name}'")
-                        processed_files_count +=1
+                        processed_files_count += 1
                     else:
-                        print(f"Failed to retrieve or parse transcription for '{original_base_name}' from {result_json_gcs_uri}.")
+                        print(f"Failed to retrieve transcription for '{original_base_name}'")
                         outfile.write(f"{original_base_name}:ERROR_PARSING:Failed to process transcript JSON\n")
-                print(f"Successfully processed and saved results for {processed_files_count} files.")
             else:
-                print("Batch operation completed, but no results found in the response object.")
-                if response:
-                     print(f"Response object details: {response}")
+                print("No results found in the response object.")
 
+        print(f"Batch completed. Processed {processed_files_count} files.")
+        return processed_files_count
 
-    except DeadlineExceeded:
-        print(f"CRITICAL ERROR: Batch operation did not complete within the timeout of {OPERATION_TIMEOUT_SECS} seconds.")
-        print("The operation might still be running in the background. Check the Google Cloud Console for its status.")
-        print(f"Partial results (if any) might not be available. Consider increasing OPERATION_TIMEOUT_SECS if this persists for large batches.")
-    except NotFound:
-        print(f"CRITICAL ERROR: Recognizer not found at {RECOGNIZER_NAME}. Please check your PROJECT_ID, LOCATION, and RECOGNIZER_ID.")
-    except GoogleAPIError as e:
-        print(f"CRITICAL Google Cloud API error during batch transcription: {e}")
     except Exception as e:
-        print(f"CRITICAL An unexpected error occurred during batch transcription: {e}")
+        print(f"Error during batch transcription: {e}")
+        return 0
 
-    print(f"\n--- Batch Transcription Process Finished. Check '{OUTPUT_TEXT_FILE}' for results. ---")
+# --- Function to transcribe uploaded files ---
+def transcribe_uploaded_files():
+    """Transcribe files that are already uploaded to GCS."""
+    print("--- Transcribing Uploaded Files ---")
+    
+    # Get list of uploaded audio files
+    gcs_audio_files = list_gcs_files(YOUR_BUCKET_NAME, YOUR_GCS_UPLOAD_FOLDER)
+    
+    if not gcs_audio_files:
+        print(f"No audio files found in GCS bucket under {YOUR_GCS_UPLOAD_FOLDER}")
+        return
+    
+    print(f"Found {len(gcs_audio_files)} audio files in GCS to transcribe.")
+    
+    # Create mapping of GCS URI to filename
+    uploaded_file_info_map = {}
+    for gcs_uri in gcs_audio_files:
+        filename = os.path.basename(gcs_uri)
+        uploaded_file_info_map[gcs_uri] = filename
+    
+    # Clear the output file at the start
+    with open(OUTPUT_TEXT_FILE, 'w', encoding='utf-8') as f:
+        f.write("")  # Clear the file
+    
+    # Process files in batches
+    total_processed = 0
+    for i in range(0, len(gcs_audio_files), BATCH_SIZE):
+        batch = gcs_audio_files[i:i + BATCH_SIZE]
+        batch_info = {uri: uploaded_file_info_map[uri] for uri in batch}
+        
+        print(f"\n--- Processing batch {i//BATCH_SIZE + 1} of {(len(gcs_audio_files) + BATCH_SIZE - 1)//BATCH_SIZE} ---")
+        processed_count = process_batch_transcription(batch, batch_info)
+        total_processed += processed_count
+        
+        if i + BATCH_SIZE < len(gcs_audio_files):
+            print("Waiting 30 seconds before next batch...")
+            import time
+            time.sleep(30)
+    
+    print(f"\nTranscription completed. Total files processed: {total_processed}")
+
+# --- Function to download transcription JSONs only ---
+def download_transcription_jsons():
+    """Download transcription JSON files from GCS."""
+    print("--- Downloading Transcription JSON Files ---")
+    
+    # List JSON files in the transcripts folder
+    json_files = list_gcs_files(YOUR_BUCKET_NAME, "transcripts/")
+    json_files = [f for f in json_files if f.endswith('.json')]
+    
+    if not json_files:
+        print("No JSON transcription files found in GCS.")
+        return
+    
+    print(f"Found {len(json_files)} JSON files to download.")
+    
+    os.makedirs(TRANSCRIPTIONS_JSON_FOLDER, exist_ok=True)
+    
+    downloaded_count = 0
+    for json_gcs_uri in json_files:
+        try:
+            uri_parts = json_gcs_uri[len("gs://"):].split('/', 1)
+            bucket_name = uri_parts[0]
+            blob_name = uri_parts[1]
+            
+            bucket = storage_client.bucket(bucket_name)
+            blob = bucket.blob(blob_name)
+            
+            json_filename = os.path.basename(blob_name)
+            local_json_path = os.path.join(TRANSCRIPTIONS_JSON_FOLDER, json_filename)
+            
+            print(f"Downloading {json_filename}...")
+            blob.download_to_filename(local_json_path)
+            downloaded_count += 1
+            
+        except Exception as e:
+            print(f"Error downloading {json_gcs_uri}: {e}")
+    
+    print(f"Downloaded {downloaded_count} JSON files to {TRANSCRIPTIONS_JSON_FOLDER}")
+
+def main():
+    print("=== Google Cloud Speech-to-Text Batch Processor ===")
+    print("Choose an operation:")
+    print("1. Upload audio files only")
+    print("2. Transcribe uploaded files (batch processing)")
+    print("3. Download transcription JSON files only")
+    print("4. Full process (upload + transcribe)")
+    
+    choice = input("Enter your choice (1-4): ").strip()
+    
+    if choice == "1":
+        upload_files_only()
+    elif choice == "2":
+        transcribe_uploaded_files()
+    elif choice == "3":
+        download_transcription_jsons()
+    elif choice == "4":
+        upload_files_only()
+        print("\nNow starting transcription process...")
+        transcribe_uploaded_files()
+    else:
+        print("Invalid choice. Please run the script again and choose 1-4.")
 
 if __name__ == "__main__":
     main()
