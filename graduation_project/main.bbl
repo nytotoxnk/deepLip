@@ -1,5 +1,16 @@
 \begin{thebibliography}{1}
 
+\bibitem{google_api_docs}
+Google Cloud.
+\newblock {\em Speech to Text API}.
+
+\bibitem{game-lipsynch}
+Arien~Kock Jonathan~Gratch.
+\newblock An evaluation of automatic lip-syncing methods for game environments.
+\newblock Technical report, University of Twente, Department of Computer
+  Science, University of SOurthern California, Institute for Creative
+  Technologies, 2022.
+
 \bibitem{Li_2021}
 Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
 \newblock A novel speech-driven lip-sync model with cnn and lstm.
