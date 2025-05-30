@@ -15,13 +15,10 @@ if not os.path.exists(audio_folder):
     print(f"Error: Audio folder not found at {audio_folder}")
     exit(1)
 
-# Create necessary directories
-Path("neura_json").mkdir(exist_ok=True)
-Path("SRT").mkdir(exist_ok=True)
-
 # File to track processed files and callback IDs
 callback_tracking_file = 'neura_callback_tracking.json'
-transcript_file = 'neura_transcript.txt'
+transcript_file = 'transcriptions_neura.txt'
+srt_file = 'srt_neura.txt'
 
 # Load existing callback tracking
 pending_callbacks = {}
@@ -101,9 +98,10 @@ def send_audio_file(audio_file_path):
         print(f"Error sending file {audio_file_path}: {e}")
         return None, None
 
-def get_transcription_status(callback_id, result_format="json", max_attempts=30, wait_time=2):
+def get_transcription_result(callback_id, result_format="txt", max_attempts=30, wait_time=2):
     """
     Poll the callback status endpoint to get transcription results
+    Returns the data content when status is "done"
     """
     status_url = f'{api_prefix}/callback/status?callbackId={callback_id}&result_as={result_format}'
     
@@ -117,57 +115,31 @@ def get_transcription_status(callback_id, result_format="json", max_attempts=30,
             response = requests.get(status_url, headers=headers)
             response.raise_for_status()
             
-            # Handle different response formats
-            if result_format == "json":
-                result = response.json()
-                print(f"Status response: {json.dumps(result, indent=2)}")
-                
-                # Check if transcription is complete
-                if 'status' in result:
-                    if result['status'] == 'completed' or result['status'] == 'success':
-                        print(f"Transcription completed for format '{result_format}'!")
-                        return result
-                    elif result['status'] == 'failed' or result['status'] == 'error':
-                        print(f"Transcription failed for format '{result_format}'!")
-                        return result
-                    elif result['status'] == 'processing' or result['status'] == 'pending':
-                        print(f"Still processing... waiting {wait_time} seconds")
-                        time.sleep(wait_time)
-                        continue
-                
-                # If no status field, check for transcription data directly
-                if 'transcription' in result or 'text' in result:
-                    print(f"Transcription completed for format '{result_format}'!")
-                    return result
+            # All responses are JSON format
+            result = response.json()
+            print(f"Status response: {json.dumps(result, indent=2)}")
+            
+            # Check if transcription is complete
+            if result.get('status') == 'done':
+                print(f"Transcription completed for format '{result_format}'!")
+                return result.get('data', '')
+            elif result.get('status') in ['failed', 'error']:
+                print(f"Transcription failed for format '{result_format}'!")
+                return None
+            elif result.get('status') in ['processing', 'pending']:
+                print(f"Still processing... waiting {wait_time} seconds")
+                time.sleep(wait_time)
+                continue
             else:
-                # For txt, srt, srt_words formats, response is text
-                result_text = response.text
-                print(f"Received {result_format} response (length: {len(result_text)} characters)")
-                
-                # Check if we got actual content (not an error message)
-                if len(result_text) > 0 and not result_text.startswith('{"status"'):
-                    print(f"Transcription completed for format '{result_format}'!")
-                    return result_text
-                elif result_text.startswith('{"status"'):
-                    # Parse JSON status message
-                    try:
-                        status_data = json.loads(result_text)
-                        if status_data.get('status') in ['processing', 'pending']:
-                            print(f"Still processing... waiting {wait_time} seconds")
-                            time.sleep(wait_time)
-                            continue
-                        elif status_data.get('status') in ['failed', 'error']:
-                            print(f"Transcription failed for format '{result_format}'!")
-                            return result_text
-                    except json.JSONDecodeError:
-                        pass
-                
-            # Continue polling if status is unclear
-            print(f"Status unclear, continuing to poll... waiting {wait_time} seconds")
-            time.sleep(wait_time)
+                print(f"Unknown status: {result.get('status')}, continuing to poll...")
+                time.sleep(wait_time)
+                continue
             
         except requests.exceptions.RequestException as e:
             print(f"Error polling status: {e}")
+            time.sleep(wait_time)
+        except json.JSONDecodeError as e:
+            print(f"Error parsing JSON response: {e}")
             time.sleep(wait_time)
     
     print(f"Maximum polling attempts ({max_attempts}) reached for format '{result_format}'. Transcription may still be processing.")
@@ -175,56 +147,36 @@ def get_transcription_status(callback_id, result_format="json", max_attempts=30,
 
 def save_results(callback_id, audio_filename):
     """
-    Get and save all transcription formats
+    Get and save transcription results
     """
     results = {}
     
-    # Get JSON result
-    print("\n" + "="*50)
-    print("Getting JSON result...")
-    json_result = get_transcription_status(callback_id, "json")
-    if json_result:
-        results['json'] = json_result
-        # Save JSON file
-        json_filename = f"neura_json/{audio_filename}_{callback_id}.json"
-        with open(json_filename, 'w', encoding='utf-8') as f:
-            json.dump(json_result, f, indent=2, ensure_ascii=False)
-        print(f"JSON result saved to: {json_filename}")
-    
     # Get TXT result
     print("\n" + "="*50)
-    print("Getting TXT result...")
-    txt_result = get_transcription_status(callback_id, "txt")
+    print("Getting TXT transcription...")
+    txt_result = get_transcription_result(callback_id, "txt")
     if txt_result:
         results['txt'] = txt_result
         # Append to transcript file
         with open(transcript_file, 'a', encoding='utf-8') as f:
             f.write(f"{audio_filename}:{txt_result}\n")
-        print(f"TXT result appended to: {transcript_file}")
+        print(f"TXT transcription saved to: {transcript_file}")
     
     # Get SRT result
     print("\n" + "="*50)
-    print("Getting SRT result...")
-    srt_result = get_transcription_status(callback_id, "srt")
+    print("Getting SRT transcription...")
+    srt_result = get_transcription_result(callback_id, "srt")
     if srt_result:
         results['srt'] = srt_result
-        # Save SRT file
-        srt_filename = f"SRT/{audio_filename}_{callback_id}.srt"
-        with open(srt_filename, 'w', encoding='utf-8') as f:
+        # Append to SRT file with readable formatting
+        with open(srt_file, 'a', encoding='utf-8') as f:
+            f.write(f"\n{'='*60}\n")
+            f.write(f"FILE: {audio_filename}\n")
+            f.write(f"CALLBACK ID: {callback_id}\n")
+            f.write(f"{'='*60}\n")
             f.write(srt_result)
-        print(f"SRT result saved to: {srt_filename}")
-    
-    # Get SRT_WORDS result
-    print("\n" + "="*50)
-    print("Getting SRT_WORDS result...")
-    srt_words_result = get_transcription_status(callback_id, "srt_words")
-    if srt_words_result:
-        results['srt_words'] = srt_words_result
-        # Save SRT_WORDS file
-        srt_words_filename = f"SRT/{audio_filename}_{callback_id}_words.srt"
-        with open(srt_words_filename, 'w', encoding='utf-8') as f:
-            f.write(srt_words_result)
-        print(f"SRT_WORDS result saved to: {srt_words_filename}")
+            f.write(f"\n{'='*60}\n\n")
+        print(f"SRT transcription saved to: {srt_file}")
     
     return results
 
@@ -237,7 +189,7 @@ for filename, callback_id in list(pending_callbacks.items()):
     print(f"\nProcessing pending callback for {filename} (ID: {callback_id})")
     
     try:
-        all_results = save_results(callback_id, Path(filename).stem)
+        all_results = save_results(callback_id, filename)
         
         if all_results and any(all_results.values()):
             print(f"Successfully processed pending callback for {filename}")
@@ -312,6 +264,9 @@ print("ALL FILES SENT!")
 print("="*70)
 print(f"Files sent for processing: {len(unprocessed_files)}")
 print(f"Total pending callbacks: {len(pending_callbacks)}")
+print(f"\nResults will be saved to:")
+print(f"  - Transcriptions: {transcript_file}")
+print(f"  - SRT subtitles: {srt_file}")
 print("\nTo retrieve results, run this script again. It will automatically")
 print("process any pending callbacks and retrieve transcriptions.")
 print("\nPending files:")
