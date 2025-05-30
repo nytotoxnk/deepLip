@@ -7,17 +7,42 @@ from pathlib import Path
 api_prefix = os.environ['NEURA_API_PREFIX']
 api_key = os.environ['NEURA_API_KEY']  
 
-# Path to your audio file
-audio_file_path = 'full_length_extracted_audio/20250403_161711.wav'
+# Audio folder path
+audio_folder = 'full_length_extracted_audio'
 
-# Check if file exists and is accessible
-if not os.path.exists(audio_file_path):
-    print(f"Error: Audio file not found at {audio_file_path}")
+# Check if folder exists
+if not os.path.exists(audio_folder):
+    print(f"Error: Audio folder not found at {audio_folder}")
     exit(1)
 
 # Create necessary directories
 Path("neura_json").mkdir(exist_ok=True)
 Path("SRT").mkdir(exist_ok=True)
+
+# File to track processed files and callback IDs
+callback_tracking_file = 'neura_callback_tracking.json'
+transcript_file = 'neura_transcript.txt'
+
+# Load existing callback tracking
+pending_callbacks = {}
+processed_files = set()
+
+if os.path.exists(callback_tracking_file):
+    with open(callback_tracking_file, 'r', encoding='utf-8') as f:
+        tracking_data = json.load(f)
+        pending_callbacks = tracking_data.get('pending_callbacks', {})
+        processed_files = set(tracking_data.get('processed_files', []))
+
+# Check what files are already in transcript file
+if os.path.exists(transcript_file):
+    with open(transcript_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            if ':' in line:
+                filename = line.split(':', 1)[0]
+                processed_files.add(filename)
+
+print(f"Found {len(processed_files)} already processed files")
+print(f"Found {len(pending_callbacks)} pending callbacks")
 
 # URL for the API endpoint
 url = f'{api_prefix}/stt'
@@ -27,18 +52,58 @@ other_data = {
     'word_timestamps': 'true'
 }
 
+def save_tracking_data():
+    """Save tracking data to file"""
+    tracking_data = {
+        'pending_callbacks': pending_callbacks,
+        'processed_files': list(processed_files)
+    }
+    with open(callback_tracking_file, 'w', encoding='utf-8') as f:
+        json.dump(tracking_data, f, indent=2)
+
+def send_audio_file(audio_file_path):
+    """
+    Send audio file to API and return callback ID
+    """
+    try:
+        with open(audio_file_path, 'rb') as audio_file:
+            files = {
+                'audio': (os.path.basename(audio_file_path), audio_file, 'audio/wav')
+            }
+
+            headers = {
+                'Authorization': f'Bearer {api_key}'
+            }
+
+            print(f"Sending audio file: {audio_file_path}")
+            print(f"File size: {os.path.getsize(audio_file_path)} bytes")
+            
+            response = requests.post(url, files=files, data=other_data, headers=headers)
+            response.raise_for_status()
+            
+            print("File uploaded successfully!")
+            
+            initial_response = response.json()
+            print("Server response:", json.dumps(initial_response, indent=2))
+            
+            # Extract callback ID from response
+            callback_id = None
+            if 'callbackID' in initial_response:
+                callback_id = initial_response['callbackID']
+            elif 'callback_id' in initial_response:
+                callback_id = initial_response['callback_id']
+            elif 'id' in initial_response:
+                callback_id = initial_response['id']
+            
+            return callback_id, initial_response
+            
+    except Exception as e:
+        print(f"Error sending file {audio_file_path}: {e}")
+        return None, None
+
 def get_transcription_status(callback_id, result_format="json", max_attempts=30, wait_time=2):
     """
     Poll the callback status endpoint to get transcription results
-    
-    Args:
-        callback_id: The callback ID returned from the initial request
-        result_format: Format for the response ("json", "txt", "srt", "srt_words")
-        max_attempts: Maximum number of polling attempts
-        wait_time: Time to wait between polling attempts (seconds)
-    
-    Returns:
-        The transcription result or None if failed
     """
     status_url = f'{api_prefix}/callback/status?callbackId={callback_id}&result_as={result_format}'
     
@@ -133,9 +198,9 @@ def save_results(callback_id, audio_filename):
     if txt_result:
         results['txt'] = txt_result
         # Append to transcript file
-        with open("neura_transcript.txt", 'a', encoding='utf-8') as f:
+        with open(transcript_file, 'a', encoding='utf-8') as f:
             f.write(f"{audio_filename}:{txt_result}\n")
-        print(f"TXT result appended to: neura_transcript.txt")
+        print(f"TXT result appended to: {transcript_file}")
     
     # Get SRT result
     print("\n" + "="*50)
@@ -163,75 +228,92 @@ def save_results(callback_id, audio_filename):
     
     return results
 
-try:
-    with open(audio_file_path, 'rb') as audio_file:
-        # 'rb' means read in binary mode, which is crucial for files
-        files = {
-            'audio': (audio_file_path.split('/')[-1], audio_file, 'audio/wav')
-            # 'audio' is the field name the server expects for the file.
-            # The tuple contains:
-            # 1. The filename (optional, but good practice)
-            # 2. The file object itself
-            # 3. The MIME type of the file (e.g., 'audio/wav' for wav, 'audio/mpeg' for mp3)
-        }
+# Process pending callbacks first
+print("\n" + "="*70)
+print("PROCESSING PENDING CALLBACKS")
+print("="*70)
 
-        # Headers for authentication
-        headers = {
-            'Authorization': f'Bearer {api_key}'
-            # Don't set Content-Type manually - let requests handle multipart/form-data
-        }
-
-        print(f"Sending audio file: {audio_file_path}")
-        print(f"File size: {os.path.getsize(audio_file_path)} bytes")
+for filename, callback_id in list(pending_callbacks.items()):
+    print(f"\nProcessing pending callback for {filename} (ID: {callback_id})")
+    
+    try:
+        all_results = save_results(callback_id, Path(filename).stem)
         
-        # Make the POST request
-        response = requests.post(url, files=files, data=other_data, headers=headers)
-
-        # Check the response from the server
-        response.raise_for_status()  # Raises an HTTPError for bad responses (4XX or 5XX)
-        print("File uploaded successfully!")
-        
-        initial_response = response.json()
-        print("Server response:", json.dumps(initial_response, indent=2))
-        
-        # Extract callback ID from response
-        callback_id = None
-        if 'callbackID' in initial_response:
-            callback_id = initial_response['callbackID']
-        elif 'callback_id' in initial_response:
-            callback_id = initial_response['callback_id']
-        elif 'id' in initial_response:
-            callback_id = initial_response['id']
-        
-        if callback_id:
-            print(f"\nReceived callback ID: {callback_id}")
-            
-            # Extract filename without extension for naming files
-            audio_filename = Path(audio_file_path).stem
-            
-            # Get and save all result formats
-            all_results = save_results(callback_id, audio_filename)
-            
-            print("\n" + "="*70)
-            print("TRANSCRIPTION PROCESSING COMPLETED!")
-            print("="*70)
-            print("Files saved:")
-            print(f"- JSON: neura_json/{audio_filename}_{callback_id}.json")
-            print(f"- TXT: neura_transcript.txt (appended)")
-            print(f"- SRT: SRT/{audio_filename}_{callback_id}.srt")
-            print(f"- SRT_WORDS: SRT/{audio_filename}_{callback_id}_words.srt")
-            
+        if all_results and any(all_results.values()):
+            print(f"Successfully processed pending callback for {filename}")
+            processed_files.add(filename)
+            del pending_callbacks[filename]
         else:
-            print("No callback ID found in response. Response may contain direct results:")
-            print(json.dumps(initial_response, indent=2))
+            print(f"Failed to get results for {filename}, keeping in pending")
+            
+    except Exception as e:
+        print(f"Error processing pending callback for {filename}: {e}")
 
-except FileNotFoundError:
-    print(f"Error: The file '{audio_file_path}' was not found.")
-except requests.exceptions.HTTPError as e:
-    print(f"HTTP error occurred: {e}")
-    print(f"Response status code: {response.status_code}")
-    print(f"Response text: {response.text}")
-except requests.exceptions.RequestException as e:
-    print(f"An error occurred during the request: {e}")
-except Exception as e:
-    print(f"An unexpected error occurred: {e}")
+# Save updated tracking data
+save_tracking_data()
+
+# Get all audio files
+audio_files = [f for f in os.listdir(audio_folder) 
+               if f.lower().endswith(('.wav', '.mp3', '.m4a', '.flac', '.aac'))]
+
+unprocessed_files = [f for f in audio_files if f not in processed_files]
+
+print(f"\n" + "="*70)
+print("FILE PROCESSING SUMMARY")
+print("="*70)
+print(f"Total audio files found: {len(audio_files)}")
+print(f"Already processed: {len(processed_files)}")
+print(f"Pending callbacks: {len(pending_callbacks)}")
+print(f"Files to process: {len(unprocessed_files)}")
+
+if unprocessed_files:
+    print("\nFiles to be processed:")
+    for file in unprocessed_files:
+        print(f"  - {file}")
+    
+    print(f"\nDo you want to send {len(unprocessed_files)} files for transcription? (Y/N): ", end="")
+    user_input = input().strip().upper()
+    
+    if user_input != 'Y':
+        print("Processing cancelled.")
+        exit()
+
+# Process unprocessed files
+print("\n" + "="*70)
+print("SENDING NEW FILES FOR TRANSCRIPTION")
+print("="*70)
+
+wait_between_files = 5  # seconds to wait between file uploads
+
+for i, filename in enumerate(unprocessed_files):
+    audio_file_path = os.path.join(audio_folder, filename)
+    
+    print(f"\n[{i+1}/{len(unprocessed_files)}] Processing: {filename}")
+    print("-" * 50)
+    
+    callback_id, response = send_audio_file(audio_file_path)
+    
+    if callback_id:
+        print(f"Received callback ID: {callback_id}")
+        pending_callbacks[filename] = callback_id
+        save_tracking_data()
+        print(f"Callback ID saved for {filename}")
+    else:
+        print(f"Failed to get callback ID for {filename}")
+        continue
+    
+    # Wait before sending next file (except for the last one)
+    if i < len(unprocessed_files) - 1:
+        print(f"Waiting {wait_between_files} seconds before sending next file...")
+        time.sleep(wait_between_files)
+
+print("\n" + "="*70)
+print("ALL FILES SENT!")
+print("="*70)
+print(f"Files sent for processing: {len(unprocessed_files)}")
+print(f"Total pending callbacks: {len(pending_callbacks)}")
+print("\nTo retrieve results, run this script again. It will automatically")
+print("process any pending callbacks and retrieve transcriptions.")
+print("\nPending files:")
+for filename in pending_callbacks.keys():
+    print(f"  - {filename}")

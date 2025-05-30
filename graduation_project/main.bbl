@@ -18,6 +18,11 @@ Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
   Processing, BioMedical Engineering and Informatics (CISP-BMEI)}, page 1–6.
   IEEE, October 2021.
 
+\bibitem{openai_whisper}
+OpenAI.
+\newblock Robust speech recognition via large-scale weak supervision.
+\newblock Technical report, 2022.
+
 \bibitem{PAWAR2024100084}
 Diksha Pawar, Prashant Borde, and Pravin Yannawar.
 \newblock Generating dynamic lip-syncing using target audio in a multimedia
