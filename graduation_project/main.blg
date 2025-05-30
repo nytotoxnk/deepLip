@@ -5,33 +5,32 @@ Reallocating 'name_of_file' (item size: 1) to 11 items.
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Database file #1: references.bib
-Warning--empty institution in openai_whisper
 You've used 5 entries,
             2118 wiz_defined-function locations,
             524 strings with 4810 characters,
-and the built_in function-call counts, 1408 in all, are:
-= -- 137
+and the built_in function-call counts, 1407 in all, are:
+= -- 138
 > -- 62
 < -- 1
 + -- 27
 - -- 20
-* -- 79
-:= -- 247
+* -- 77
+:= -- 248
 add.period$ -- 15
 call.type$ -- 5
 change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 6
+cite$ -- 5
 duplicate$ -- 61
 empty$ -- 108
 format.name$ -- 20
-if$ -- 293
+if$ -- 294
 int.to.chr$ -- 0
 int.to.str$ -- 5
 missing$ -- 2
 newline$ -- 27
 num.names$ -- 10
-pop$ -- 28
+pop$ -- 27
 preamble$ -- 1
 purify$ -- 20
 quote$ -- 0
@@ -43,8 +42,7 @@ text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 20
-warning$ -- 1
+warning$ -- 0
 while$ -- 12
 width$ -- 6
-write$ -- 53
-(There was 1 warning)
+write$ -- 54
