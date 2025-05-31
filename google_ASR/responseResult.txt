@@ -1,0 +1,74 @@
+Response.results ---> [alternatives {
+  transcript: "po unë do vetë afër torino"
+  confidence: 0.697114706
+  words {
+    start_offset {
+      nanos: 440000000
+    }
+    end_offset {
+      nanos: 600000000
+    }
+    word: "Po"
+    confidence: 0.535586715
+  }
+  words {
+    start_offset {
+      nanos: 600000000
+    }
+    end_offset {
+      nanos: 720000000
+    }
+    word: "unë"
+    confidence: 0.583231449
+  }
+  words {
+    start_offset {
+      nanos: 720000000
+    }
+    end_offset {
+      nanos: 880000000
+    }
+    word: "do"
+    confidence: 0.692946374
+  }
+  words {
+    start_offset {
+      nanos: 880000000
+    }
+    end_offset {
+      seconds: 1
+      nanos: 120000000
+    }
+    word: "vetë"
+    confidence: 0.643975556
+  }
+  words {
+    start_offset {
+      seconds: 1
+      nanos: 120000000
+    }
+    end_offset {
+      seconds: 1
+      nanos: 400000000
+    }
+    word: "afër"
+    confidence: 0.807684362
+  }
+  words {
+    start_offset {
+      seconds: 1
+      nanos: 400000000
+    }
+    end_offset {
+      seconds: 1
+      nanos: 840000000
+    }
+    word: "Torino."
+    confidence: 0.736142159
+  }
+}
+result_end_offset {
+  seconds: 1
+}
+language_code: "sq-AL"
+]

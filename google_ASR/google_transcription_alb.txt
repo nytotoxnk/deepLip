@@ -1,0 +1,63 @@
+20250403_161711.wav:ERROR_PARSING:Failed to process transcript JSON
+20250408_212848.wav:3 9 1 2 3 9 1
+20250421_195822.wav:3 9 1 4 5 9 1 4 5
+20250421_203247.wav:3 1 2 3 4 5 6 7 8 9 10
+20250421_201934.wav:Është një gjë që është e vështirë. 33
+20250429_115317.wav:3300000
+20250429_115126.wav:3 9 1 4 6 9 1 4
+20250429_115528.wav:3 9 1 4 6 9 1
+20250429_115056.wav:3 9 1 2 7 4 5 1
+20250429_115242.wav:3 9 1 2 3 7 1 4
+20250429_130637.wav:Është një gjë që është e vështirë për të bëjë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. Është një gjë që është e vështirë.
+20250429_125844.wav:3300000
+20250429_130234.wav:33333
+20250429_125651.wav:3 1 2 3 4 5 6 7 8 9 10
+20250429_130503.wav:3300000
+20250429_164258.wav:Është një gjë që është e vështirë. Është një gjë që është e vështirë për të bëjë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. 3300000
+20250429_135454.wav:Është një gjë që është e vështirë. 3 7 1 7 1 7 1
+20250429_142152.wav:Është një gjë që është e vështirë. 33
+20250429_130924.wav:Është një gjë që është e vështirë. 3 9 1 2 4 7 1
+20250429_141700.wav:Është një gjë që është e vështirë për të bëjë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. 3 9 1 2 3 9 1
+20250516_183235.wav:33
+20250516_183223.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_183037.wav:3
+20250516_183209.wav:Ëh, ëh, ëh.
+20250516_183142.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_183318.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_183305.wav:33
+20250516_183328.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_183255.wav:Ëh,
+20250516_183338.wav:Ëh,
+20250516_223040.wav:Ëh,
+20250516_223105.wav:Ëh,
+20250516_183349.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_183402.wav:33
+20250516_223051.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_223143.wav:Ëh,
+20250516_223208.wav:ERROR_PARSING:Failed to process transcript JSON
+20250516_223132.wav:Ëh,
+20250516_223156.wav:Ëh, ëh, ëh
+20250516_223120.wav:Ëh,
+20250517_203018.wav:33
+20250516_223236.wav:Ëh,
+20250516_223221.wav:ERROR_PARSING:Failed to process transcript JSON
+20250517_202939.wav:33
+20250516_223248.wav:ERROR_PARSING:Failed to process transcript JSON
+20250517_203102.wav:ERROR_PARSING:Failed to process transcript JSON
+20250517_203122.wav:3 9 1 2 5 1 3
+20250517_203136.wav:3 7 1 2 3 5 9
+20250517_203048.wav:ERROR_PARSING:Failed to process transcript JSON
+20250517_203032.wav:ERROR_PARSING:Failed to process transcript JSON
+20250524_191657.wav:3 9 1 2 3 0
+20250524_191629.wav:33
+20250517_203238.wav:3 7 1 7 1 7 1
+20250517_203206.wav:3 9 1 2
+20250517_203151.wav:3 7 1 7 1 7 1 7 1
+20250525_110641.wav:3 9 1 4 2 9 5
+20250524_192811.wav:3 1 2 3 4 5 6 7 8 9 10
+20250524_205312.wav:3 9 1 2 3 0
+20250524_205241.wav:3 9 1 2 7 4 5
+20250524_191831.wav:3 9 1 2 3 5 1
+20250525_110752.wav:3 1 2 3 4 5 6 7 8 9 10
+20250525_111857.wav:Është një gjë që është e vështirë për të bëjë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. Është një gjë që është e vështirë. 3 9 1 4 6 9 1
+20250525_111119.wav:3 9 1 2 7 4 5 9 6 3 0
