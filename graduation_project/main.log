@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.26)  30 MAY 2025 23:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.26)  31 MAY 2025 23:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -551,31 +551,33 @@ LaTeX Warning: Reference `google_api_docs' on page 8 undefined on input line 239
 
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 245--250
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 246--251
 
  []
 
 
 
-[9]
-
 [10]
-Overfull \hbox (4.51056pt too wide) in paragraph at lines 259--261
+
+[11]
+Overfull \hbox (4.51056pt too wide) in paragraph at lines 260--262
 []\OT1/cmr/m/n/12 There are a lot of mod-els and pa-pers which have been made for the task of lip-synchronization,
  []
 
 
 
-[11]
-Overfull \hbox (5.78853pt too wide) in paragraph at lines 299--300
+[12]
+Overfull \hbox (5.78853pt too wide) in paragraph at lines 300--301
 []\OT1/cmr/m/n/12 Albanian ASR open-source model, google speech-to-text API is paid ser-vice, and Kushtrims
  []
 
 (main.bbl
 
-[12])
+[13])
 
-[13] (main.aux)
+[14] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
@@ -588,17 +590,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8BEC183A32DD0BFB9FBFE510287F0CD6;1647.
  ) 
 Here is how much of TeX's memory you used:
- 19043 strings out of 469959
- 371825 string characters out of 5470318
- 732454 words of memory out of 5000000
+ 19044 strings out of 469959
+ 371832 string characters out of 5470318
+ 733454 words of memory out of 5000000
  45544 multiletter control sequences out of 15000+600000
  633971 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  86i,12n,117p,901b,1167s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\aldo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (14 pages, 137555 bytes).
+Output written on main.pdf (15 pages, 138737 bytes).
 PDF statistics:
- 182 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
+ 186 PDF objects out of 1000 (max. 8388607)
+ 34 named destinations out of 1000 (max. 500000)
  115 words of extra memory for PDF output out of 10000 (max. 10000000)
 
