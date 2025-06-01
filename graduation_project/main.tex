@@ -239,11 +239,11 @@ Wav2Vec2 was also considered as an option and fine-tuned with the 40 hours of au
 Google Cloud offers a Speech-to-Text API that has support for albanian language [\ref{google_api_docs}]. Their model Chirp 2 seemed exceptional when using their transcription service using the user interface, but there were significant problems implementing their API for it to have the same performance when transcribing being the same as the performance from their user interface. The API service gave a confidence score that was very usefull to use as something above 0.9 was very accuracy while you could ignore the samples below that threshhold. Another usefull feature of the speech-to-text API was the individual word confidence score and timing of when each word started and ended, similar to a SubRip Subtitle file (SRT file).\\
 Kushtrim/whisper-large-v3-turbo-shqip is a model in huggingface made by Kushtrim Vioska also based on the whisper model. It was fine-tuned with 200 hours of diverse and well annotated audio, included was gegh dialect. As of now this model was not available to host on local machines but could be used in HuggingFace spaces where you could connect it with a  Gradio API. The speed of audio transcription changed based on the size of the file and the availability of the resources as it was open to everyone. The accuracy was increadibly good, (needs some short testing, with actual transcripts being comapred). Unfortunately there was no confidence score or word timings.\\
 Kushtrim seems to have updated the model just recently, adding another 100 more hours of audio making the total to "300 plus" in the Hugginface space.\\
-In 2023, the company Niv-Al released "Peshperima," a model based on OpenAI's Whisper. This model was later improved and made closed-source, offering it as a paid service. As a student, I was granted access to use and experiment with the model for a limited time. Although no confidence score for individual transcriptions, on the neura.al website they do mention a 93\% text accuracy. The tool also provided the transcription in an SRT file format.\\
+In 2023, the company Niv-Al released "Peshperima," a model based on OpenAI's Whisper. This model was later improved and made closed-source, offering it as a paid service. As a student, I was granted access to use and experiment with the model for a limited time. Although no confidence score for individual transcriptions, on the neura.al website they do advertises a 93\% text accuracy. The tool also provided the transcription in an SRT file format.\\
 As the better models, Kushtrims and Neura transcribed the same audio files. Scores were compared and Neura had the best performance. With a WER score of 0.0 while Kushtrim managed to get a WER score of 0.1193. The difference is very small and the performance of both models is very good, alghough Kushtrims model, being only in HuggingFace space, is more volitale because of the amount of requests it gets and the speed of the transcription. The model has gotten updated recently and now has 300 plus hours of audio.
 
 \subsection{Audio}
-The first step of the project is extracting audio from the videos, this was done using ffmpeg. Going by the suggestions of googles speech-to-text API best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless format.\\
+The first step of the project is extracting audio from the videos, this was done using ffmpeg. Going by the suggestions of googles speech-to-text API documentation \cite{google_api_docs} best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless format.\\
 A simple test was done to check which specs were best suited for the videos we were creating for the dataset. These were all tested using googles speech-to-text API giving a confidence score for each of the tests. If we are going to do tests.\\  \textbf{Need to add the test results here. \\ Might need to split audio file into two mono files or downmix into one mono file.}
 \\
 One group of audio files were made in a lossless format, signed 16bit PCM (linear16), 16000hz sampling rate. While the other folder, was made with the same codec but with 48000hz sampling rate.  
@@ -281,14 +281,14 @@ List of challanges:
     \item No open source models for the transcription of the audio from albanian.
     \item Voice cloning models being evaluated using a human evaluation and that is biased.
     \item Storage of data, both in the cloud and locally.
-    \item Computing power.
+    \item Computing power, GPU, TPU, etc.
     \item Training time.
     \item If the spoken albanian is with a heavy dialect, an Albanian ASR trained with large number dialects is needed
     \item If the cutting of videos is not done correctly, it is possible to cut a word in half
     \item Translating the transcribed albanian dialect. How possible it is? NLP script transformation + translate*
     \item Voice cloning emotions.
     \item Video chunking first then transcription, or transcription (have to keep timings) then chunking - might be more possible and more cost effective than the NLP to find the problems in the language/chunked words but not for dialects.
-    \item Could probably use the timings from google speech-to-text api to make the cuts since it offers that. Making the better option to be transcript first then cut/chunk second.  
+    \item Could probably use the timings from google speech-to-text api (or any timings) to make the cuts since it offers that. Making the better option to be transcript first then cut/chunk second.  
     \item Multiple Ethical challanges
     \item Are NLP-s better than LLM-s in these cases/uses.?
 \end{itemize}

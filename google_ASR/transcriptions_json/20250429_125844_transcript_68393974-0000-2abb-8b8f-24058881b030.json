@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "alternatives": [
+        {
+          "transcript": "3300000",
+          "confidence": 0.96107846,
+          "words": [
+            {
+              "startOffset": "0.200s",
+              "endOffset": "0.200s",
+              "word": "3300000",
+              "confidence": 0.9625679
+            }
+          ]
+        }
+      ],
+      "resultEndOffset": "30s",
+      "languageCode": "sq-AL"
+    }
+  ]
+}
