@@ -9,6 +9,7 @@
 \contentsline {section}{\numberline {4}Transcription}{9}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Tests}{9}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Audio}{10}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Notes}{10}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Studying the literature}{12}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Questions raised}{12}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.3}Voice Cloning}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Notes}{10}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Studying the literature}{11}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Questions raised}{11}{subsection.4.6}%

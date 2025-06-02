@@ -4,6 +4,12 @@
 Google Cloud.
 \newblock {\em Speech to Text API}.
 
+\bibitem{Real-time_voice_cloning_system}
+Weixin Hu and Xianyou Zhu.
+\newblock A real-time voice cloning system with multiple algorithms for speech
+  quality improvement.
+\newblock {\em PLOS ONE}, 18(4):1--14, 04 2023.
+
 \bibitem{game-lipsynch}
 Arien~Kock Jonathan~Gratch.
 \newblock An evaluation of automatic lip-syncing methods for game environments.
@@ -18,6 +24,10 @@ Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
   Processing, BioMedical Engineering and Informatics (CISP-BMEI)}, page 1–6.
   IEEE, October 2021.
 
+\bibitem{NAUTILUS}
+Hieu-Thi Luong and Junichi Yamagishi.
+\newblock Nautilus: a versatile voice cloning system, 2020.
+
 \bibitem{openai_whisper}
 OpenAI.
 \newblock Robust speech recognition via large-scale weak supervision.
@@ -28,5 +38,12 @@ Diksha Pawar, Prashant Borde, and Pravin Yannawar.
 \newblock Generating dynamic lip-syncing using target audio in a multimedia
   environment.
 \newblock {\em Natural Language Processing Journal}, 8:100084, 2024.
+
+\bibitem{Unified_system_for_Voice_Cloning_and_Voice_Conversion}
+Tasnima Sadekova, Vladimir Gogoryan, Ivan Vovk, Vadim Popov, Mikhail Kudinov,
+  and Jiansheng Wei.
+\newblock A unified system for voice cloning and voice conversion through
+  diffusion probabilistic modeling.
+\newblock In {\em Interspeech 2022}, pages 3003--3007, 2022.
 
 \end{thebibliography}
