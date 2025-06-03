@@ -46,4 +46,10 @@ Tasnima Sadekova, Vladimir Gogoryan, Ivan Vovk, Vadim Popov, Mikhail Kudinov,
   diffusion probabilistic modeling.
 \newblock In {\em Interspeech 2022}, pages 3003--3007, 2022.
 
+\bibitem{viola-voice-role-play}
+Yemin Shi, Yu~Shu, Siwei Dong, Guangyi Liu, Jaward Sesay, Jingwen Li, and
+  Zhiting Hu.
+\newblock Voila: Voice-language foundation models for real-time autonomous
+  interaction and voice role-play, 2025.
+
 \end{thebibliography}
