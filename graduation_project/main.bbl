@@ -1,8 +1,34 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{facebook-wav2vec}
+Alexei Baevski, Henry Zhou, Abdelrahman Mohamed, and Michael Auli.
+\newblock wav2vec 2.0: A framework for self-supervised learning of speech
+  representations, 2020.
 
 \bibitem{google_api_docs}
 Google Cloud.
 \newblock {\em Speech to Text API}.
+
+\bibitem{biomedinformatics4010023}
+Themis Exarchos, Georgios~N. Dimitrakopoulos, Aristidis~G. Vrahatis, Georgios
+  Chrysovitsiotis, Zoi Zachou, and Efthymios Kyrodimos.
+\newblock Lip-reading advancements: A 3d convolutional neural network/long
+  short-term memory fusion for precise word recognition.
+\newblock {\em BioMedInformatics}, 4(1):410--422, 2024.
+
+\bibitem{GoogleFaceDetector}
+{Google}.
+\newblock {MediaPipe Face Detector | Google for Developers}.
+\newblock
+  \url{https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector},
+  2024.
+\newblock Accessed: 2025-06-11.
+
+\bibitem{deep-speech}
+Awni Hannun, Carl Case, Jared Casper, Bryan Catanzaro, Greg Diamos, Erich
+  Elsen, Ryan Prenger, Sanjeev Satheesh, Shubho Sengupta, Adam Coates, and
+  Andrew~Y. Ng.
+\newblock Deep speech: Scaling up end-to-end speech recognition, 2014.
 
 \bibitem{Real-time_voice_cloning_system}
 Weixin Hu and Xianyou Zhu.
@@ -10,12 +36,44 @@ Weixin Hu and Xianyou Zhu.
   quality improvement.
 \newblock {\em PLOS ONE}, 18(4):1--14, 04 2023.
 
+\bibitem{Audio-driven-facial-animation}
+Diqiong Jiang, Jian Chang, Lihua You, Shaojun Bian, Robert Kosk, and Greg
+  Maguire.
+\newblock Audio-driven facial animation with deep learning: A survey.
+\newblock {\em Information}, 15(11), 2024.
+
 \bibitem{game-lipsynch}
 Arien~Kock Jonathan~Gratch.
 \newblock An evaluation of automatic lip-syncing methods for game environments.
 \newblock Technical report, University of Twente, Department of Computer
   Science, University of SOurthern California, Institute for Creative
   Technologies, 2022.
+
+\bibitem{automatic-lip-synch-methods-in-games}
+Jonathan Kock, Arien ;~Gratch.
+\newblock An evaluation of automatic lip-syncing methods for game environments.
+\newblock Technical report, UNIVERSITY OF SOUTHERN CALIFORNIA LOS ANGELES,
+  2005.
+
+\bibitem{earliest-lip-synch}
+B.E. Koster, R.D. Rodman, and D.~Bitzer.
+\newblock Automated lip-sync: direct translation of speech-sound to
+  mouth-shape.
+\newblock In {\em Proceedings of 1994 28th Asilomar Conference on Signals,
+  Systems and Computers}, volume~1, pages 583--586 vol.1, 1994.
+
+\bibitem{kushtrim}
+{Kushtrim}.
+\newblock Whisper large v3 turbo shqip.
+\newblock
+  \url{https://huggingface.co/spaces/Kushtrim/whisper-large-v3-turbo-shqip},
+  2025.
+
+\bibitem{https://doi.org/10.1002/vis.4340020404}
+John Lewis.
+\newblock Automated lip-sync: Background and techniques.
+\newblock {\em The Journal of Visualization and Computer Animation},
+  2(4):118--122, 1991.
 
 \bibitem{Li_2021}
 Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
@@ -28,6 +86,11 @@ Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
 Hieu-Thi Luong and Junichi Yamagishi.
 \newblock Nautilus: a versatile voice cloning system, 2020.
 
+\bibitem{neura}
+Neura.
+\newblock Neura.al.
+\newblock \url{https://neura.al/}, 2025.
+
 \bibitem{openai_whisper}
 OpenAI.
 \newblock Robust speech recognition via large-scale weak supervision.
@@ -38,6 +101,23 @@ Diksha Pawar, Prashant Borde, and Pravin Yannawar.
 \newblock Generating dynamic lip-syncing using target audio in a multimedia
   environment.
 \newblock {\em Natural Language Processing Journal}, 8:100084, 2024.
+
+\bibitem{openvoice}
+Zengyi Qin, Wenliang Zhao, Xumin Yu, and Xin Sun.
+\newblock Openvoice: Versatile instant voice cloning.
+\newblock {\em arXiv preprint arXiv:2312.01479}, 2023.
+
+\bibitem{florijan-qosja}
+Florijan Qosja.
+\newblock Development of an albanian language transcriber using artificial
+  intelligence.
+\newblock \url{https://github.com/florijanqosja/Albanian-ASR}, 2023.
+
+\bibitem{computers14010007}
+Amirkia Rafiei~Oskooei, Mehmet~S. Aktaş, and Mustafa Keleş.
+\newblock Seeing the sound: Multilingual lip sync for real-time face-to-face
+  translation.
+\newblock {\em Computers}, 14(1), 2025.
 
 \bibitem{Unified_system_for_Voice_Cloning_and_Voice_Conversion}
 Tasnima Sadekova, Vladimir Gogoryan, Ivan Vovk, Vadim Popov, Mikhail Kudinov,
@@ -51,5 +131,10 @@ Yemin Shi, Yu~Shu, Siwei Dong, Guangyi Liu, Jaward Sesay, Jingwen Li, and
   Zhiting Hu.
 \newblock Voila: Voice-language foundation models for real-time autonomous
   interaction and voice role-play, 2025.
+
+\bibitem{ObamaNet}
+Supasorn Suwajanakorn, Steven~M. Seitz, and Ira Kemelmacher-Shlizerman.
+\newblock Synthesizing obama: learning lip sync from audio.
+\newblock {\em ACM Trans. Graph.}, 36(4), July 2017.
 
 \end{thebibliography}

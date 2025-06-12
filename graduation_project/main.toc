@@ -5,11 +5,11 @@
 \contentsline {subsection}{\numberline {3.1}Background of the study}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}How lip synchronization works}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Methodology}{7}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Work Steps Overview}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Work Steps Overview}{9}{subsection.3.4}%
 \contentsline {section}{\numberline {4}Transcription}{9}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Tests}{9}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Audio}{10}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Voice Cloning}{10}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Notes}{10}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Studying the literature}{11}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Questions raised}{11}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.2}Audio transcription}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Voice Cloning}{13}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Lip synch model}{13}{section.5}%
+\contentsline {section}{\numberline {6}Future improvements}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Questions raised}{14}{subsection.6.1}%

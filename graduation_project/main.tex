@@ -42,6 +42,9 @@
     \fancyfoot[C]{\thepage}
 % Random text (not needed)
 \usepackage{duckuments}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{graphicx}
 
 % New and re-newcommands
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Specific rule definition
@@ -152,7 +155,7 @@
     
     Thesis Advisor: Prof. Miralda Çuka
     
-    July 2025, 183 pages
+    June 2025, 20 pages
     
     \vspace{1cm}
 \end{center}
@@ -189,40 +192,31 @@ Finally, I am grateful for the support of my family and friends. Something somet
 % Body
 % ----------------------------------------------------------------------
 \section{Introduction}
-
 \subsection{Background of the study}
-
-Option 1\\
-The increasing globalisation of online content consumption presents a significant challange for video creators aiming to reach diverse audiences, thereby creating the need to produce multilingual versions of their work. This often involves an increased workload, time and other resources, a perfect example of this is a German content creator in YouTube called der8auer (link?). Der8auer makes the same content in two languages, in english and in german. This workflow includes a lot steps, filming, editing, storing and uploading the content are all things that take time. This project addresses the challange of automatic translation and lip synchronization of video content into multiple languages. 
-The main focus of the project will be the Albanian language as an underrepresented and low resource language. To bridge a gap in current research and practical applications of automated video translation and lip synchronization.\\
-Option 2\\
-Being able to make only one video and have it in multiple languages will help creators but also the target audience as well. Cutting down on the time and money it takes to make two or more videos with the same subject but in different languages. One such case is a youtube creator named der8auer from Germany, for the same topic he creates two videos, one in english and one in german. Sometimes his videos are quite long and having to do them again in another language will tire you out. Having a model that can take your video, translate it into another language and synchronize your lips to the movement of the language of your choosing would be a tool in your arsenal.\\
-This project focuses on lip synchronization video dubbing on Albanian language as a low resource and underrepresented language, addressing a significant gap in current research and practical applications.\\
-Some of the usages of this lip-sync dubbing technology are: video dubbing and translation, real-time Face-to-Face translation(this would be into the future) and multilingual communication, gaming and virtual environments (some games come in different languages but the characters are coded to move their lips only according to one language, although some companies have done work to change this depending on the language the users select, cyberpunk 2077 used JALI ai for animation lip-sync) reduced cost and labor and time in this case, entertainment and content creation, speech recognition and lip-reading. Film, entertainment and media production. Education and training videos, especially in cases where there is a diverse workforce.\\
-
+The increasing globalisation of online content consumption presents a significant challange for video creators aiming to reach diverse audiences, thereby creating the need to produce multilingual versions of their work. Being able to make only one video and have it transform into multiple languages will help creators but also the target audience as well. Cutting down on the time and money it takes to make two or more videos with the same subject but in different languages. One such case is a youtube creator named der8auer from Germany, for the same topic he creates two videos, one in english and one in german. Sometimes his videos are quite long and having to do them again in another language will tire you out. Having a model that can take your video, translate it into another language and synchronize your lips to the movement of the language of your choosing would be a tool in your arsenal. Some of the usages of this lip-sync dubbing technology are: video dubbing and translation, real-time Face-to-Face translation that will be possible in the future and multilingual communication, gaming and virtual environments reduced cost and labor and time in this case, entertainment and content creation, speech recognition and lip-reading. Film, entertainment and media production. Education and training videos, especially in cases where there is a diverse workforce. It also has promissing applications in areas for speech therapy, language learning and assistive communication devices for individuals with hearing impairments \cite{biomedinformatics4010023}. Advancments in Machine Learning (ML) have made it possible to have Automatic Speech Recognition (ASR) 
 
 \subsection{How lip synchronization works}
-Phonemes are the distinct units of sound in speech, or the individual sounds that make up speech and visemes are visual representations of phonemes. Visemes serve to map sounds (phonemes) to corresponding mouth positions or shapes. The goal is to go from the audible (phonemes) to the visual (visemes). Visemes group similar-looking mouth shapes, which reduces the complexity required for animation. Mapping phonemes down to a smaller number of visemes gives artists fewer expressions to pose.\\
-The history of lip-syncing comes from animation and in particular two-dimentional cartoons where artists had to make facial movement according to the sounds of speech [\cite{game-lipsynch}].
+Phonemes are the distinct units of sound in speech, and visemes are visual representations of phonemes. Think phonemes as the audio and visemes as the video. Visemes serve to map sounds (phonemes) to corresponding mouth positions or shapes. The goal is to go from the audible  to the visual (visemes). Visemes group similar-looking mouth shapes, which reduces the complexity required for animation. Relating the extracted audio features to the corresponding visual mouth shapes and facial expression. Mapping phonemes down to a smaller number of visemes gives artists fewer expressions to pose. The history of lip-syncing comes from animation and in particular two-dimentional cartoons where artists had to make facial movement according to the sounds of speech \cite{game-lipsynch}. Lip-synchronization is a field that has been studied since 1994 \cite{earliest-lip-synch}, where Automatic lip-sync (ALS) could be used for animating cartoons realistically making the mouth movement more smoother and have it a more natural feel and could also help in aiding people with hearing disability. Later in 1997 a new method was proposed where they used Fast Fourier Transform (FFT) for speech signal analysis, statistical measures called "moments" are used to describe the shape of the FFT. Mouth parameter measurements are used to measure the jaw position, the height of the maximum vertical opening between the lips and horizontal opening of the lips. This method did not require phonemic analysis or prior knowledge of the speech content. ObamaNet was an innovative architecture released in 2017, it used a time-delayed Long Short-Term Memory (LSTM) network to produce synchronized lip-synch videos. The network learned to map raw audio feature to corresponding mouth shapes based on hours of high-quality videos of a specific target person \cite{ObamaNet}. Convoluted Neural Networks (CNN) played an important role in lip-synchronization as it helped in feature extraction for visual features, and image processing and generation. CNNs are often used with other models like LSTM blocks, or encoder and discriminator networks based on a Generative Adversarial Network (GAN). A study by Pawar et al. (2024) focused on Marathi, an Indian language which has a shortage of datasets, similar to that of the Albanian language \cite{PAWAR2024100084}. Integrating CNNs with adversarial training and including RNN-based architectures, specifically LSTM for lip-synch generation, Song et al. (2019), Sadoughi et al. (2021) and Li et al (2021) also used a combination of CNN, RNN, GANs and LSTMs \cite{Audio-driven-facial-animation} \cite{Li_2021}. Another similar study by Exarchos et al. (2024) for lip-reading in Greek language tackeled the scarcity of datasets available. The study proposed a combination of 3D CNNs and LSTM networks for word recognition from lip movements.  
 
 \subsection{Methodology}
-A key limmitation encountered was the lack of suitable Albanian video datasets, specifically open-license content with direct-to-camera speech, reflecting the broader challange of working with low-resource languages in multimedia applications. To address the first issue, custom video contennt was created featuring self-recorded footage in a one by one aspect ratio and lowest camera setting to save .
-The first step for this project was the data creation, seeing as there is not a lot of free and publicly available free-use content I can use we had to create the data myself.\\
-Videos were recorded at 1440x1440 resolution (1:1 aspect ratio) at 30 frames per second, with durations ranging from 10 seconds up till 5 minutes. The study at (citation needed for the optimal length of time of the videos) found that the optimal length time was for videos with one word in them. To adapt to this, a script was made to create small chunks of videos from a lengthy video to be closer to that optimal format. Videos could have been created by following and reading a script thereby avoiding the transcipiton step, however we want to create a workflow that will take any video of an albanian speaker and turn it into a dub lip synched video.\\
-From the videos the next step is audio extraction which will be used for transcription and for the base of the voice cloning tool before inputing it into the final lip synchronization model. For the audio extraction ffmpeg library was used, and audio was extracted in a lossless codec, 16000hz sample rate and signed 16-bit Pulse Code Modulation (PCM), per Google Speech-to-text API documentation \cite{google_api_docs}.
-\\
-The audio gets sent through the transcription service, and gets saved in a text file along with the name of the transcripted audio file.
-When all audio files have been transcripted, they are translated using (PUT TOOL USED HERE) in (PUT NUMBER OF LANGUAGES USED HERE) languages.
-(SHOULD MENTION BEFORE WHAT I TRIED FLORJAN ASR FOR EXAMPLE, PESHPERIMA V2, TRAINING OUR OWN MODEL WITH DATASET FROM FLORJAN ETC.) (MAYBE NOT IN THIS SECTION OF THE PAGE????)
-(Speech-to-text API from Google Cloud services offered a wide range of languages and Albanian was a supported language, utilizing their Chirp 2 model, the transcriptions were very accurate, even more so as google gives you a confidence score about the sentence or even individual words.)\\
+A key limmitation encountered was the lack of suitable Albanian video datasets, specifically open-license content with direct-to-camera speech, reflecting the broader challange of working with low-resource languages in multimedia applications. To address the first issue, custom video contennt was created featuring self-recorded footage in a one by one aspect ratio and lowest camera setting to save. The first step for this project was the data creation, seeing as there is not a lot of free and publicly available free-use content I can use we had to create the data myself.
+Videos were recorded at 1440x1440 resolution (1:1 aspect ratio) at 30 frames per second, with durations ranging from 10 seconds up till 5 minutes. The study at (citation needed for the optimal length of time of the videos) found that the optimal length time was for videos with one word in them. To adapt to this, a script was made to create small chunks of videos to be closer to that optimal format. Videos could have been created by following and reading a script thereby avoiding the transcipiton step, however we want to create a workflow that will take any video of an albanian speaker and turn it into a dub lip synched video. \textbf{This step should be removed if not implemented at the end. Also need to add the study for the dataset with one word that showed better results, I think it was Wav2Lip}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/work-flow.png}
+    \caption{Work Flow}
+    \label{fig:work-flow}
+\end{figure}
+
+Audio was then extracted from the videos using ffmpeg package, Pulse Code Modulation, Signed 16-bit, Little Endian (pcm\_s16le), a lossless, uncompressed audio codec format, 16000hz sample rate and monophonic, meaning single audio channel.  which will be used for transcription and for the base of the voice cloning tool before inputing it into the final lip synchronization model. For the audio extraction ffmpeg library was used, and audio was extracted in a lossless codec, 16000hz sample rate and signed 16-bit Pulse Code Modulation (PCM), per Google Speech-to-text API documentation \cite{google_api_docs}.\\
+The audio gets sent through an Automatic Speech Recognition model, converting spoken language into written text. and gets saved in a text file, each line contains the name of the file transcripted and a colon separates it from the text. After several tests of three models, Google Speech to Text Chirp 2, Kushtrims and Neura, the latter one was selected as being the most accurate \cite{google_api_docs}\cite{kushtrim}\cite{neura}.\\
+Transcripted text is translated to a target language that is supported by the voice cloning model. Using deep-translator python package and utilizing google translate as its core. Audio of the same file is used as reference to make a voice clone using OpenVoice, in the target language, a check is made if the cloned output is longer or shorter than the reference audio\cite{openvoice}. Another clone is made with the speed of the audio modified to be as close as possible to the original. OpenVoice offers emotion and accent cloning offering flexible voice control. The translated text will be used as the base of what the voice clone should output. OpenVoices Zero-shot cross-lingual voice cloning can generate speech that can be not present in the multi-lingual training dataset used by the model. There is "native" support and generalisation of voice clones. The native support is offered for languages like english, spanish, french, chinese, japanese and korean in the second version of OpenVoice.\\
+The reference video is processed to be cropped in a 512x512, 25 frames per second format with the face centered, this was made using a face detection model which would detect faces in every frame of the video, from there we take the center and crop accordingly. Googles mediapipe framwork was used for the face detection task \cite{GoogleFaceDetector}. This format is a pre-requisite before inputting videos into the final lip-synching model.  Pre-emptive tests were done on the videos to see if the face detector worked as intended and could detect a face in every frame of the videos. 
+
 After translating, the translated text and the original audio are used to make the voice clone. We need the original audio of the transcript because of emotions displayed in the audio can be used by the voice cloning tool.\\
 Cloned voice and the original video from where the cloned voice was based on are then used to train the lip synchronization model. 
-\\Several models (citations needed) were available to try for albanian transcription although with different accuracy. Automatic Speech Recognition (ASR) models are measured using Word Error Rate (WER) where a low score of means perfect translation and a score of 1.0 is the worst case, working on the albanian language I focused only on those models that had support for it. Whisper by OpenAI was one such model, availabe on HuggingFace. To make such model have a better performance (need some results of the model transcribing an audio file) we need to fine-tune it. (THIS SECTION CAN MOVE TO THE "WHAT I TRIED TO DO AND FAILED" SECTION)\\
-Here lies another issue with working with a low resource language, not only are there low resources for video, but also for audio which we could use to fine-tune the model. There were two models made especially with albanian language in mind, albanian-asr and peshperima-v2. Because of the low ammount of resources albanian-asr was only able to get to a 46.3\% accuracy, which does not help at all. Peshperima-large-v2 was also not successful when testing. Whisper had a mulltiple sized models which required fine-tuning before being able to use it for transcription. The only trainable model size for a reasonable ammount of time was the whisper-small. The low ammount of data for the audio made the whisper-small not do much better than albanian-asr. \\
-Another option was Wav2Vec and its different variations made from Facebook/Meta, this one also failed like the previous models because of lacking datasets. No model tested was able to perform in a state where they could have been used in a real world application, for that reason we needed to switch to a finished model that did not need fine-tuning.\\
-Google cloud service offered speech-to-text API options and for many different languages. One of their models was offered for albanian language and had great performance, giving a confidence score about the transcription which would prove to be very usefull since you can use it as a metric to decide if you want to accept the transcription or not. \\
-The next step is the preparation of the dataset collected, which was in 1-5 minute video format. From this we extracted audio from the video and tried finding moments of silence inbetween the speaking in order to cut the video into chunks to then later on feed it into the Convolutional Neural Network (CNN).
-One of the reasons of why this is a hard problem is that you cannot just get the unique sounds and join them together to form a word, each unique sound changes depending on what is the letter or sound before it. Here is where the deep learning/machine learning helps as it studites large amounts of video and audio to notice these features.
+
 \textbf{One of the challanges of creating a lip synchronization in videos is the need for the lip movements to accurately align with a specified target speech segment, especially in multilingual and unconstrained environment. Visual data falling out of sunc with updated audio and inaccurate lip movements in target videos.}\\
 CNN and Generative Adversial Networks (GANs) to create the lip movements that sync up, this combined with a Discriminator Network which would try and detect the GANs fake lip movements and real ones, pushing each other to get better.
 
@@ -234,39 +228,105 @@ From the video we need to get the transcription in albanian, for this step sever
 
 \subsection{Tests}
 From early review there was very little research done on the subject of Automatic Speech Recognition (ASR) for Albanian language, (Florjan citation not sure if it should be applied) Albanian-ASR project in github was a model trained with 40 hours of high quality audio data, using DeepSpeech architecture and additional mechanisms such as Attention mechanism and context-dependent phoneme modeling to enhance the accuracy of the Albanian language ASR system. The low ammount of hours led the model to have a low accuracy of 46.3\% which cannot be used in real-world applications.\\
-Whisper made by OpenAI had support for Albanian language but its transcription capabilities were also not able to perform much better on Albanian language \cite{openai_whisper}. Trying to fine tune the model with the 40 hours of albanian audio provided by the Albanian-ASR proved challanging when trying to fine-tune their largest whisper-large-v3 model (1.55 Billion parameters). With the current hardware being an Nvidia 3080ti 12GB graphics card, it takes 177 hours for the largest model to train. Only when we moved on to the tiny model (39 Million parameters)was the training time less than 24 hours. The accuracy of the whisper-tiny model with the fine-tuned albanian audio dataset also did not have enough accuracy for real world usage.\\
+Whisper made by OpenAI had support for Albanian language but its transcription capabilities were also not able to perform much better on Albanian language \cite{openai_whisper}. Trying to fine tune the model with the 40 hours of albanian audio provided by the Albanian-ASR proved challanging when trying to fine-tune their largest whisper-large-v3 model (1.55 Billion parameters). With the current hardware being an Nvidia 3080ti 12GB graphics card, it takes 177 hours for the largest model to train. Only when we moved on to the small model (244 Million parameters) was the training time less than 24 hours. The accuracy of the whisper-small model with the fine-tuned albanian audio dataset also did not have enough accuracy for real world usage.\\
 Wav2Vec2 was also considered as an option and fine-tuned with the 40 hours of audio from Florjans datasets. However upon testing, the model's accuracy was not suitable for the project. \\
-Google Cloud offers a Speech-to-Text API that has support for albanian language [\ref{google_api_docs}]. Their model Chirp 2 seemed exceptional when using their transcription service using the user interface, but there were significant problems implementing their API for it to have the same performance when transcribing being the same as the performance from their user interface. The API service gave a confidence score that was very usefull to use as something above 0.9 was very accuracy while you could ignore the samples below that threshhold. Another usefull feature of the speech-to-text API was the individual word confidence score and timing of when each word started and ended, similar to a SubRip Subtitle file (SRT file).\\
+Google Cloud offers a Speech-to-Text API that has support for albanian language \cite{google_api_docs}. Their model Chirp 2 seemed exceptional when using their transcription service using the user interface, but there were significant problems implementing their API for it to have the same performance when transcribing being the same as the performance from their user interface. The API service gave a confidence score that was very usefull to use as something above 0.9 was very accuracy while you could ignore the samples below that threshhold. Another usefull feature of the speech-to-text API was the individual word confidence score and timing of when each word started and ended, similar to a SubRip Subtitle file (SRT file).\\
 Kushtrim/whisper-large-v3-turbo-shqip is a model in huggingface made by Kushtrim Vioska also based on the whisper model. It was fine-tuned with 200 hours of diverse and well annotated audio, included was gegh dialect. As of now this model was not available to host on local machines but could be used in HuggingFace spaces where you could connect it with a  Gradio API. The speed of audio transcription changed based on the size of the file and the availability of the resources as it was open to everyone. The accuracy was increadibly good, (needs some short testing, with actual transcripts being comapred). Unfortunately there was no confidence score or word timings.\\
 Kushtrim seems to have updated the model just recently, adding another 100 more hours of audio making the total to "300 plus" in the Hugginface space.\\
-In 2023, the company Niv-Al released "Peshperima," a model based on OpenAI's Whisper. This model was later improved and made closed-source, offering it as a paid service. As a student, I was granted access to use and experiment with the model for a limited time. Although no confidence score for individual transcriptions, on the neura.al website they do advertises a 93\% text accuracy. The tool also provided the transcription in an SRT file format.\\
+
 As the better models, Kushtrims and Neura transcribed the same audio files. Scores were compared and Neura had the best performance. With a WER score of 0.0 while Kushtrim managed to get a WER score of 0.1193. The difference is very small and the performance of both models is very good, alghough Kushtrims model, being only in HuggingFace space, is more volitale because of the amount of requests it gets and the speed of the transcription. The model has gotten updated recently and now has 300 plus hours of audio.
 
-\subsection{Audio}
-The first step of the project is extracting audio from the videos, this was done using ffmpeg. Going by the suggestions of googles speech-to-text API documentation \cite{google_api_docs} best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless format.\\
-A simple test was done to check which specs were best suited for the videos we were creating for the dataset. These were all tested using googles speech-to-text API giving a confidence score for each of the tests. If we are going to do tests.\\  \textbf{Need to add the test results here. \\ Might need to split audio file into two mono files or downmix into one mono file.}\\
-One group of audio files were made in a lossless format, signed 16bit PCM (linear16), 16000hz sampling rate. While the other folder, was made with the same codec but with 48000hz sampling rate.\\
+\subsection{Audio transcription}
+The first step of the project is extracting audio from the videos and this was done using the open-source ffmpeg package. Going by the suggestions for optimizing transcription quality through googles speech-to-text API documentation \cite{google_api_docs}, best practices, the audio was sampled at 16000 Hz, converted into a singned-integer bitrate, and in a lossless pcm\_s16le format. One group of audio files were made in a lossless format, signed 16bit PCM (linear16), 16000hz sampling rate. While the other folder, was made with the same codec but with 48000hz sampling rate.\\There is no open-source ASR model for Albanian language, and the amount of Albanian audio dataset is very low. Florijan (2023) managed to collect 40 hours of diverse accents, dialects and speech styles of Albanian audio, the purpose was to exceed an initial accuracy target of 45\% \cite{florijan-qosja}. This data was filtered out of 133 hours available, going through validation accuracy above 0.9 used for training. The base model used for this was Deep Speech 2 by Baidou \cite{deep-speech}, consisting of a combination of CNNs and RNNs. The model did managed to reach an accuracy of 46.3\%, passing the threshhold but the model is not suitable for real world application. To test if there was another better model suitable for the dataset used by Florijan we used the Whisper model by OpenAI \cite{openai_whisper}. At first we tested the biggest model out of the box to check its performance, There are seven distinct whisper models whos difference lies in the parameter size and support for english only. Whisper is trained on 680,000 hours of labeled audio data, 438,218 hours of English language only, 117,000 hours covering 96 languages, Albanian included, though it does not mention the amount of hours for each language. Audio was sampled at 16000hz in mono, similar to that of Googles documentation. Its English ASR performance was very close to that of a human. Models range from tiny (39 million parameters) to large-v3 (1550 million parameters) these models were tested, attempts to fine-tune the large-v3 model with the dataset from Florijan we fruitless as the training time for such large parameter model was over 177 hours on a RTX 3080Ti 12GB Nvidia graphics card and 32GB of RAM. All models were tested from ones with the biggest parameter to the smallest, the only model that we could feasibly train was the whisper-small with a little bit more than 8 hours. ASR systems are evaluated using a Word Error Rate (WER) score, measuring the number of errors (substitutions, insertions and deletions) needed to transform the output of the ASR system into the reference transcript or ground truth. A lower WER score indicates a better performance in \ref{eq:WER} we can see the formula used for the calculation. The fine-tuned whisper-small model achieved a 61.52\% WER, not usable in any application. Testing the accuracy of the whisper-large-v2 model as a baseline reference without any fine-tuning resultet in a 55.1\% Word Error Rate (WER) accuracy, the larger whisper-large-v3 model did not have much change and managed to score a 49.45\% WER, both of these not up to par. Facebooks Wav2Vec2 baseline model with 960 hours of training data was tested and managed to achieve a 97.74\% WER \cite{facebook-wav2vec}. 
+
+\begin{equation}
+\label{eq:WER}
+WER = \frac{S + D + I}{N} = \frac{S + D + I}{S + D + C}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item S is the amount of substitutions,
+    \item D is the amount of deletions,
+    \item I is the amount of insertions,
+    \item C is the amount of correct words,
+    \item N is the amount of correct words.
+\end{itemize}
+
+From this point onward the search continued into closed systems, offered comercially. Googles Speech to Text API offered support for Albanian language and had free credits for first time user. Their system gives a confidence score for each transcription section and confidence score in individual words aswell. After transcription, a subtitle file format was also available to check the timings of when each word or sentence is spoken, this is an increadibly usefull feature as we could use it to cut the videos into smaller chunks as Pawar et al. (2024) experienced accelerated training process and improved performance when utilising a "vVISWA" dataset composed of isolated words \cite{PAWAR2024100084}. In the first test Googles Speech to Text API, using Chirp 2 as a model, managed to achieve a WER score of 10.7\%. Kushtrims model based on the whisper-large-v3-turbo and fine-tuned with 200 hours of curated Albanian audio with diverse dialect, hosted on the Hugginface Spaces, the model weights were not opensource, nor was the dataset used for the training \cite{kushtrim}. It did not offer a confidence score nor a SRT file with audio timings.The model could be accessed for inference using the API available from Gradio, which is how the transcriptions were processed, however the model was quite slow in times as more than one individual would try to transcribe audio at the same time, increasing the transcription time a lot, in some cases taking more than three hours for twelve seconds of audio. At a later point the model was updated with an additional 100 hours of Albanian audio. Both versions of the model were evaluated, in table \ref{tab:firs_test} we can see the scores for all models, and Kushtrims managed to get a 16.46\% WER. The other ASR model tested was Neuras \cite{neura}, a comercially available product, we were granted access and free credits. Their website advertises the model as having a 93\% accuracy, which a bit of an underestimation on their part as it scored a 3.09\% WER which is equivalent to 96.91\% accuracy. The first set of audio files contained casual speech and did not have language that would be deemed difficult to understand or hear, testing was done for ten files, comparing the ground truth to the hypothesis file.\\
+WER as a metric has its limmitations, from the formula we can see that the substitutions, deletions and insertions have the same weight. A minor misspelling might have the same weight as a word that completly changes the meaning of the sentence. It also doesnt take in consideration a mistake in letters inside a word. For example, the word "duket" was incorrectly transcribed as "duhet", in this case the whole word is a mistake. All unneccessary elements are removed, punctuation, making numbers into 123. The core of the WER calculation is finding the minimum number of edits needed to transform the hypothesis (transcription) text into the reference (ground truth) text. This is typically done using a dynamic programming algorithm, specifically the Levenshtein distance algorithm, applied at the word level.
+\begin{table}[h!]
+\centering
+\caption{Error Analysis for Challenging Albanian Scripts}
+\label{tab:firs_test}
+\begin{tabular}{lccc|ccc|ccc}
+\toprule
+\textbf{File ID} & \multicolumn{3}{c}{\textbf{Neura}} & \multicolumn{3}{c}{\textbf{Kushtrim}} & \multicolumn{3}{c}{\textbf{Google API}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+ & \textbf{S} & \textbf{D} & \textbf{I} & \textbf{S} & \textbf{D} & \textbf{I} & \textbf{S} & \textbf{D} & \textbf{I} \\
+\midrule
+File 1 & 0 & 0 & 0 & 2 & 0 & 0 & 1 & 0 & 0 \\
+File 2 & 0 & 0 & 0 & 8 & 0 & 0 & 7 & 0 & 0 \\
+File 3 & 0 & 0 & 0 & 27 & 4 & 3 & 14 & 17 & 1 \\
+File 4 & 27 & 7 & 4 & 53 & 15 & 24 & 25 & 7 & 3 \\
+File 5 & 2 & 0 & 1 & 31 & 3 & 7 & 18 & 7 & 6 \\
+File 6 & 0 & 0 & 0 & 6 & 0 & 0 & 2 & 0 & 0 \\
+File 7 & 0 & 0 & 0 & 12 & 2 & 6 & 13 & 2 & 6 \\
+File 8 & 0 & 0 & 0 & 6 & 0 & 1 & 4 & 0 & 0 \\
+File 9 & 2 & 0 & 0 & 12 & 0 & 3 & 11 & 0 & 5 \\
+File 10 & 2 & 0 & 0 & 10 & 3 & 2 & 5 & 2 & 0 \\
+\midrule
+\textbf{Total Errors} & \textbf{33} & \textbf{7} & \textbf{5} & \textbf{167} & \textbf{27} & \textbf{46} & \textbf{100} & \textbf{35} & \textbf{21} \\
+\textbf{Overall WER} & \multicolumn{3}{c}{\textbf{3.09\%}} & \multicolumn{3}{c}{\textbf{16.46\%}} & \multicolumn{3}{c}{\textbf{10.70\%}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A second test was made reading along a script made with the purpose of being a difficult dialog. Five new videos were created, audio extracted and we tested Googles Chirp 2, Kushtrims and Neuras model as having the best results for a further analysis. Table \ref{tab:wer_hard} shows the results from the tested audio, very different results shown from the first test, Neuras accuracy dropped close to their advertised numbers, Kushtrims model was the one that moved less, although we have to keep in mind that this was the model with 300+ hours of training data, dispite this the models performance decreased. An anomaly was detected with Kushtrims model output because the number of Insertions is 52, in the transcription there were added words "Piii" after the end of the audio file which was not present in the other models. Removing these anomalies the models performance improves to 13.01\%, the number of insertions dropped from 52 to 30. Googles Chirp 2 had the best results, achieving a 5.17\% WER score, this could be the result of having a larger and more diverse dataset compared to Neuras model which might have more audio content with everyday speech rather than scienfic language.
+\begin{table}[h!]
+\centering
+\caption{Second Analysis WER score}
+\label{tab:wer_hard}
+\begin{tabular}{lccc|ccc|ccc}
+\toprule
+\textbf{File ID} & \multicolumn{3}{c}{\textbf{Neura}} & \multicolumn{3}{c}{\textbf{Kushtrim}} & \multicolumn{3}{c}{\textbf{Google API}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+ & \textbf{S} & \textbf{D} & \textbf{I} & \textbf{S} & \textbf{D} & \textbf{I} & \textbf{S} & \textbf{D} & \textbf{I} \\
+\midrule
+File 1 & 3 & 0 & 1 & 4 & 0 & 0 & 4 & 0 & 0 \\
+File 2 & 8 & 0 & 1 & 4 & 0 & 0 & 4 & 0 & 0 \\
+File 3 & 5 & 0 & 0 & 6 & 2 & 52 & 2 & 17 & 1 \\
+File 4 & 5 & 1 & 1 & 4 & 1 & 1 & 5 & 1 & 1 \\
+File 5 & 5 & 0 & 1 & 6 & 0 & 1 & 2 & 0 & 2 \\
+\midrule
+\textbf{Total Errors} & \textbf{26} & \textbf{1} & \textbf{4} & \textbf{24} & \textbf{3} & \textbf{54} & \textbf{21} & \textbf{1} & \textbf{3} \\
+\textbf{Overall WER} & \multicolumn{3}{c}{\textbf{7.08\%}} & \multicolumn{3}{c}{\textbf{18.49\%}} & \multicolumn{3}{c}{\textbf{5.17\%}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Implementation of Googles API was the most challanging of the three models, as there were many different configurations, and the results varied when accessing it through the API. While Google's web UI offered more consistent transcriptions, the process required manual effort. 
 
 \subsection{Voice Cloning}
-Voice cloning is a subtask of speech synthesis, using deep learning to create speech imitating a specific voice. Prioritizing the preservation of the identity of the target speaker. Modern systems use a combination of speaker embedder (or encoder) to capture unique voice characteristics, a synthesizer to predict acoustic representations from text and the speaker embedding, and a cocoder to convert these representations into speech.\\
+\textbf{Should add a bit of history for the voice cloning, different models, architectures, its uses etc.}\\Voice cloning is a subtask of speech synthesis, using deep learning to create speech imitating a specific voice. Prioritizing the preservation of the identity of the target speaker. Modern systems use a combination of speaker embedder (or encoder) to capture unique voice characteristics, a synthesizer to predict acoustic representations from text and the speaker embedding, and a cocoder to convert these representations into speech.\\
 The NAUTILUS system from \cite{NAUTILUS} has the ability to clone untranscribed speech, using a small amount of untranscribed speech, cited as about five minutes. Experiments coparing performance with different amounts of adaptation data show that Mean Opinion Score (MOS) for naturalness and similarity can improve significantly from five seconds to 15 seconds of untranscribed audio, plateauing or showing only minor improvement beyond that (e.g. 30 or 60 seconds)\cite{Unified_system_for_Voice_Cloning_and_Voice_Conversion}.\\ 
 Noisy audio can negatively impact the quality of generated speech, a real-time voice cloning system notes that generated speech can have low intelligibility due to artifacts, such as murmurs, hums, or noisy audio \cite{Real-time_voice_cloning_system}.\\
-Because of different trainning and test datasets and metrics used, MOS for example is a subjective measurement,  
-
-
-\subsection{Notes}
-The google api workflow was difficult to implement for it to work correctly and there were more lines of code to implement it than the other models. The accuracy of the API was not the best, but it was the only one that gave a confidence score for each of the tests. A new model made by Kushtrim Vioska, based on openai's whisper-large-v3-turbo and trained on 200 hours of albanian audio was able to transcribe the audio with a great accuracy, unfortuantely the model at this time does not have the weights open source and was only able to be used through a gradio app which slowed down the process of transcribing the audio significantly and the resources of the huggingface model are volitale because of the amount of requests it gets.\\
-Going through the next step of the workflow we move from the transciption to the translation of the text, which can be done with high accuracy using a lot of different models which \textbf{need to be tested and researched more thoroughly}. \\
-Using the translated text into the language of our choice we can then try and use a voice cloning model to make the voice dubbing. A lot of models were available for this task, Nari Labs released Dia, in 22nd April 2025, coqui-ai, which a lot of other models are based on. 
+Because of different trainning and test datasets and metrics used, MOS for example is a subjective measurement.
 A paper in 5th of May 2025 was released by \cite{viola-voice-role-play} which created a foundation model for realt-time autonomous interaction and voice role-play. \\
-\textbf{It can be posisble to make a comparison system between the google API and the Kushtrim Vioska model to see how much do they match. Not sure what we can achieve with this. Google API does give us a confidence score for each of the tests. We can probably use this to see how much the model is confident in the transcription and then use that to our advantage. If we also use the word confidence we can then compare to see if Kushtrims model made a different transcription, whenever the confidence is low we can use Kushtrims model to make a transcription.}\\
-Additionaly, \cite{PAWAR2024100084} used "vVISWA" dataset which hade isolated words or independent speech, which worked great in combining the audio and video in the trainning set, and according to them reducing overfitting due to its inherent data augmentation effect.\\
-Can master thesis be used as a source?\\
-Can you use email as a source?\\
+*Show differences between intra-lingual and cross-lingual models in voice-cloning research*. 
+
+Using the translated text into the language of our choice we can then try and use a voice cloning model to make the voice dubbing. A lot of models were available for this task, Nari Labs released Dia, in 22nd April 2025, coqui-ai, which a lot of other models are based on. 
+
+
 Fine-tuuning the voice cloning models since they might respond better to more of my voice.
-\subsection{Studying the literature}
-There are a lot of models and papers which have been made for the task of lip-synchronization, but most of them are focused on english and other high resource languages. Pawar, D. et al. (2024) used Generative Adversarial Networks (GANs), using both audio and visual features techiques like MFCCs and VGG-M-based CNNs to achieve accurate lip-synchronization. \cite{PAWAR2024100084} shows some of the models using GANs as their architecture. \cite{Li_2021} used a combination of a deep neural network with one dimension and a Long Short-Term Memory (LSTM) to generate a face model from speech input.\\
-Traditionally, methods required highly controlled and precisely aligned datasets, making them less flexible and scalable for diverse inputs. Newer approaches aim to reduce this dependency. 
+
+\section{Lip synch model}
+Before deep learning lip-sync was achieved using viseme-based and rule-based system, mapping phonemes to corresponding visual mouth shapes. These methods were more commonly used in cartoons as they lacked the realism and fluidity of natural speech \cite{automatic-lip-synch-methods-in-games}\cite{https://doi.org/10.1002/vis.4340020404}\cite{computers14010007}. 
+
+\section{Future improvements}
+
+
+
 \subsection{Questions raised}
 List of questions:
 \begin{itemize}
@@ -316,6 +376,15 @@ List of improvements:
     \item Real time lip-synch dubbing
     \item Separating the dataset into two groups the new dataset with videos close to one word per video and see the results of that and the original dataset with longer videos. 
     \item NLP can also be utilized in the audio length check, if we have too much of a difference in audio length, we could apply NLP-s to change the sentence into something shorter or longer but keeping the sentence about the same.
+\end{itemize}
+
+List of things to not forget to add:
+\begin{itemize}
+    \item Mention confidence score in google api, it also offered timings like SRT file
+    \item Kushtrim first 63 videos were on 200 hours of dataset, and the next 5 "hard" videos were on 300 hours. There can be a slight comparison on the accuracy. Should retest it.
+    \item Write about the changes in translation from NTL to LLM being better, keeping context etc.
+    \item Mention the fact that there is no open-source Albanian ASR model, no large open-source free-use dataset either. 
+    \item 
 \end{itemize}
 
 \bibliography{references}
