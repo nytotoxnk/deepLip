@@ -1,16 +1,14 @@
-# Example code (specifics depend on the model)
-import torch
+from transformers import pipeline
 import os
-import librosa
-from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
+import torch # Required for PyTorch backend
 
 # --- Configuration ---
 # Path to the folder containing your audio files
 AUDIO_FOLDER = "full_length_extracted_audio"
 # Output file name for transcriptions
-OUTPUT_FILE = "wav2vec2_transcription.txt"
+OUTPUT_FILE = "whisper_transcription_hf.txt"
 
-WAV2VEC2_MODEL = "facebook/wav2vec2-base-960h"
+WHISPER_MODEL = "openai/whisper-large-v3" 
 
 if torch.cuda.is_available():
     DEVICE = "cuda:0" 
@@ -20,30 +18,15 @@ else:
     print("Using CPU for inference. Transcription might be slow for large models.")
 
 
-def transcribe_audio_with_wav2vec2(audio_file_path, processor, model):
+def transcribe_audio_with_hf_whisper(audio_file_path, transcriber_pipeline):
     """
-    Transcribes an audio file using a Wav2Vec2 ASR model.
+    Transcribes an audio file using a Hugging Face Whisper ASR model.
     """
     try:
-        # Load audio with librosa (Wav2Vec2 expects 16kHz sampling rate)
-        audio, rate = librosa.load(audio_file_path, sr=16000)
-        
-        # Process audio
-        input_values = processor(audio, sampling_rate=rate, return_tensors="pt").input_values
-        
-        # Move to device if using GPU
-        if DEVICE != "cpu":
-            input_values = input_values.to(DEVICE)
-        
-        # Perform inference
-        with torch.no_grad():
-            logits = model(input_values).logits
-        
-        # Decode the prediction
-        predicted_ids = torch.argmax(logits, dim=-1)
-        transcription = processor.batch_decode(predicted_ids)[0]
-        
-        return transcription
+        # Let the pipeline handle audio loading and preprocessing automatically
+        # This is more robust and handles various audio formats better
+        result = transcriber_pipeline(audio_file_path)
+        return result["text"]
     except Exception as e:
         print(f"Error transcribing {audio_file_path}: {e}")
         print(f"  This could be due to a corrupted audio file or unsupported format.")
@@ -54,15 +37,16 @@ def main():
         print(f"Error: Audio folder '{AUDIO_FOLDER}' not found. Please create it and place your audio files inside.")
         return
 
-    # Initialize the Wav2Vec2 processor and model
-    print(f"Loading Wav2Vec2 model '{WAV2VEC2_MODEL}' to {DEVICE}...")
-    processor = Wav2Vec2Processor.from_pretrained(WAV2VEC2_MODEL)
-    model = Wav2Vec2ForCTC.from_pretrained(WAV2VEC2_MODEL)
-    
-    # Move model to device if using GPU
-    if DEVICE != "cpu":
-        model = model.to(DEVICE)
-    
+    # Initialize the Whisper pipeline
+    print(f"Loading Whisper model '{WHISPER_MODEL}' to {DEVICE}...")
+    transcriber = pipeline(
+        "automatic-speech-recognition",
+        model=WHISPER_MODEL,
+        torch_dtype=torch.float16 if DEVICE == "cuda:0" else torch.float32, # Use float16 for GPU memory efficiency
+        device=DEVICE,
+        return_timestamps=True,  # Enable long-form transcription for audio > 30 seconds
+        generate_kwargs={"language": "albanian", "task": "transcribe"}
+    )
     print("Model loaded.")
 
     transcriptions = []
@@ -81,7 +65,7 @@ def main():
         audio_file_path = os.path.join(AUDIO_FOLDER, audio_file_name)
 
         print(f"({i+1}/{len(audio_files)}) Transcribing '{audio_file_name}'...")
-        text_transcription = transcribe_audio_with_wav2vec2(audio_file_path, processor, model)
+        text_transcription = transcribe_audio_with_hf_whisper(audio_file_path, transcriber)
 
         if text_transcription is not None:
             # Ensure the output format is `video_id.wav:text_transcription` as requested
