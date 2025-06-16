@@ -1,48 +1,58 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
+Case mismatch error between cite keys audio-driven-facial-animation and Audio-driven-facial-animation
+---line 70 of file main.aux
+ : \citation{audio-driven-facial-animation
+ :                                        }
+I'm skipping whatever remains of this command
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Database file #1: references.bib
-You've used 23 entries,
+Repeated entry---line 647 of file references.bib
+ : @article{audio-driven-facial-animation
+ :                                       ,
+I'm skipping whatever remains of this entry
+You've used 35 entries,
             2118 wiz_defined-function locations,
-            620 strings with 8165 characters,
-and the built_in function-call counts, 7309 in all, are:
-= -- 678
-> -- 425
-< -- 4
-+ -- 174
-- -- 146
-* -- 481
-:= -- 1250
-add.period$ -- 66
-call.type$ -- 23
-change.case$ -- 144
+            664 strings with 10184 characters,
+and the built_in function-call counts, 11354 in all, are:
+= -- 1018
+> -- 747
+< -- 5
++ -- 303
+- -- 262
+* -- 781
+:= -- 1966
+add.period$ -- 97
+call.type$ -- 35
+change.case$ -- 237
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 246
-empty$ -- 539
-format.name$ -- 146
-if$ -- 1509
+cite$ -- 35
+duplicate$ -- 348
+empty$ -- 798
+format.name$ -- 262
+if$ -- 2305
 int.to.chr$ -- 0
-int.to.str$ -- 23
-missing$ -- 11
-newline$ -- 114
-num.names$ -- 46
-pop$ -- 172
+int.to.str$ -- 35
+missing$ -- 17
+newline$ -- 169
+num.names$ -- 70
+pop$ -- 296
 preamble$ -- 1
-purify$ -- 119
+purify$ -- 201
 quote$ -- 0
-skip$ -- 205
+skip$ -- 297
 stack$ -- 0
-substring$ -- 292
-swap$ -- 56
-text.length$ -- 4
+substring$ -- 386
+swap$ -- 69
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 92
+type$ -- 138
 warning$ -- 0
-while$ -- 57
-width$ -- 25
-write$ -- 238
+while$ -- 82
+width$ -- 37
+write$ -- 352
+(There were 2 error messages)

@@ -1,9 +1,23 @@
 \begin{thebibliography}{10}
 
+\bibitem{zero-shot-voice-cloning}
+Kurniawati Azizah.
+\newblock Zero-shot voice cloning text-to-speech for dysphonia disorder
+  speakers.
+\newblock {\em IEEE Access}, 12:63528--63547, 2024.
+
+\bibitem{voice-cloning-survey}
+Hussam Azzuni and Abdulmotaleb~El Saddik.
+\newblock Voice cloning: Comprehensive survey, 2025.
+
 \bibitem{facebook-wav2vec}
 Alexei Baevski, Henry Zhou, Abdelrahman Mohamed, and Michael Auli.
 \newblock wav2vec 2.0: A framework for self-supervised learning of speech
   representations, 2020.
+
+\bibitem{chen2021v2cvisualvoicecloning}
+Qi~Chen, Yuanqing Li, Yuankai Qi, Jiaqiu Zhou, Mingkui Tan, and Qi~Wu.
+\newblock V2c: Visual voice cloning, 2021.
 
 \bibitem{google_api_docs}
 Google Cloud.
@@ -15,6 +29,18 @@ Themis Exarchos, Georgios~N. Dimitrakopoulos, Aristidis~G. Vrahatis, Georgios
 \newblock Lip-reading advancements: A 3d convolutional neural network/long
   short-term memory fusion for precise word recognition.
 \newblock {\em BioMedInformatics}, 4(1):410--422, 2024.
+
+\bibitem{threats-of-voice-cloning}
+Genesis~Gregorious Genelza.
+\newblock A systematic literature review on ai voice cloning generator: A
+  gane-changer or a threat?
+\newblock {\em Journal of Emerging Technologies (JET)}, 4(2), 2024.
+
+\bibitem{lipsynchronydirectaudiovisual}
+Lucas Goncalves, Prashant Mathur, Xing Niu, Brady Houston, Chandrashekhar
+  Lavania, Srikanth Vishnubhotla, Lijia Sun, and Anthony Ferritto.
+\newblock Improving lip-synchrony in direct audio-visual speech-to-speech
+  translation, 2024.
 
 \bibitem{GoogleFaceDetector}
 {Google}.
@@ -35,6 +61,14 @@ Weixin Hu and Xianyou Zhu.
 \newblock A real-time voice cloning system with multiple algorithms for speech
   quality improvement.
 \newblock {\em PLOS ONE}, 18(4):1--14, 04 2023.
+
+\bibitem{harminizaion-of-voice-cloning}
+Onuh Ijiga, Idoko Idoko, L.A Enyejo, Omachile Akoh, Solomon Ugbane, and Akan
+  Ibokette.
+\newblock {\em * Corresponding author: Onuh Matthew Ijiga Harmonizing the
+  voices of AI: Exploring generative music models, voice cloning, and voice
+  transfer for creative expression}, volume~11.
+\newblock JAETS, 03 2024.
 
 \bibitem{Audio-driven-facial-animation}
 Diqiong Jiang, Jian Chang, Lihua You, Shaojun Bian, Robert Kosk, and Greg
@@ -86,6 +120,11 @@ Xiaohong Li, Xiang Wang, Kai Wang, and Shiguo Lian.
 Hieu-Thi Luong and Junichi Yamagishi.
 \newblock Nautilus: a versatile voice cloning system, 2020.
 
+\bibitem{Dia}
+NariLabs.
+\newblock Dia.
+\newblock \url{https://narilabs.org/}, 2025.
+
 \bibitem{neura}
 Neura.
 \newblock Neura.al.
@@ -119,6 +158,17 @@ Amirkia Rafiei~Oskooei, Mehmet~S. Aktaş, and Mustafa Keleş.
   translation.
 \newblock {\em Computers}, 14(1), 2025.
 
+\bibitem{multilingual-lip-sync}
+Amirkia Rafiei~Oskooei, Mehmet~S. Aktaş, and Mustafa Keleş.
+\newblock Seeing the sound: Multilingual lip sync for real-time face-to-face
+  translation.
+\newblock {\em Computers}, 14(1), 2025.
+
+\bibitem{chatterbox}
+ResembleAI.
+\newblock Chatterbox.
+\newblock \url{https://www.resemble.ai/}, 2025.
+
 \bibitem{Unified_system_for_Voice_Cloning_and_Voice_Conversion}
 Tasnima Sadekova, Vladimir Gogoryan, Ivan Vovk, Vadim Popov, Mikhail Kudinov,
   and Jiansheng Wei.
@@ -136,5 +186,24 @@ Yemin Shi, Yu~Shu, Siwei Dong, Guangyi Liu, Jaward Sesay, Jingwen Li, and
 Supasorn Suwajanakorn, Steven~M. Seitz, and Ira Kemelmacher-Shlizerman.
 \newblock Synthesizing obama: learning lip sync from audio.
 \newblock {\em ACM Trans. Graph.}, 36(4), July 2017.
+
+\bibitem{ye2023geneface++}
+Zhenhui Ye, Jinzheng He, Ziyue Jiang, Rongjie Huang, Jiawei Huang, Jinglin Liu,
+  Yi~Ren, Xiang Yin, Zejun Ma, and Zhou Zhao.
+\newblock Geneface++: Generalized and stable real-time audio-driven 3d talking
+  face generation.
+\newblock {\em arXiv preprint arXiv:2305.00787}, 2023.
+
+\bibitem{geneface}
+Zhenhui Ye, Ziyue Jiang, Yi~Ren, Jinglin Liu, JinZheng He, and Zhou Zhao.
+\newblock Geneface: Generalized and high-fidelity audio-driven 3d talking face
+  synthesis, 2023.
+
+\bibitem{mimitalk}
+Zhenhui Ye, Tianyun Zhong, Yi~Ren, Ziyue Jiang, Jiawei Huang, Rongjie Huang,
+  Jinglin Liu, Jinzheng He, Chen Zhang, Zehan Wang, Xize Chen, Xiang Yin, and
+  Zhou Zhao.
+\newblock Mimictalk: Mimicking a personalized and expressive 3d talking face in
+  minutes, 2024.
 
 \end{thebibliography}
