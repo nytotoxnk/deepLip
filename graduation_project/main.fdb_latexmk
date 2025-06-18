@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1750097401.78483 "main.aux" "main.bbl" "main" 1750097402.03369 2
-  "./references.bib" 1750097397 25928 b88089f6437dead7b32772b258352e1c ""
+["bibtex main"] 1750168433.08638 "main.aux" "main.bbl" "main" 1750168433.38277 2
+  "./references.bib" 1750116462 25998 89910d64d30287f8708f12f25fc01738 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1750097401 5488 91c419d5dc388883c25484b96e02d51b "pdflatex"
+  "main.aux" 1750168432 8360 2bd7cc52dea8fb9795f55af9cae53d81 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1750097398.62485 "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" "main.pdf" "main" 1750097402.03409 0
+["pdflatex"] 1750168428.66202 "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" "main.pdf" "main" 1750168433.38321 0
   "C:/Users/aldo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1749580018 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/aldo/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1745676537 14064 d82e4a9c2d7079db70fb671d13387235 ""
   "C:/Users/aldo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1745676456 13147729 5858f4cd12e7fe8efc993cb2b1791c45 ""
@@ -135,14 +135,23 @@
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/latex/varwidth/varwidth.sty" 1238469540 10894 d359a13923460b2a73d4312d613554c8 ""
   "C:/Users/aldo/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" 1750097397 46999 e56a60880762e4c17a6fb88dacf3808b ""
+  "c:/Users/aldo/Documents/work/python_project/graduation_project/main.tex" 1750168426 53328 b9225fd6eaf7e8e2a6eee5a1079b0b22 ""
+  "images/MSE_v2.png" 1750114885 89478 fffdb1ed7c2cfdd115a86d8bfdf055e9 ""
+  "images/ambient_loss_v2.png" 1750114903 48624 a79c4e3c45dbc26f641a394e0715e7b7 ""
+  "images/head_training_loss.png" 1750149298 92017 e1c71424d0673ecf4f179d87d1da6527 ""
+  "images/lambda_ambient_loss.png" 1750109916 49255 ae5a8b15d5000153bc12fe930a624e82 ""
+  "images/mse_sr_mse_loss.png" 1750109919 83877 a908c1159f5dde00d472d22e5f14ad7f ""
+  "images/torso_weight_entropy_loss.png" 1750160432 59552 6bb8e25aa7d3ca23d3f072780665b169 ""
+  "images/total_loss_v2.png" 1750114861 49994 4d94d94f8d666ff62d71242ce57269d5 ""
+  "images/training_loss.png" 1750109004 41701 7ffa8e3f1bfe71af3cdae838b67c3091 ""
+  "images/validation_torso_total_loss.png" 1750160435 50471 6c4edcf4a112b50d26e446e25b2ca0b7 ""
   "images/visemes.png" 1750073937 10862825 4b605a9db719bd91a581de54572d3112 ""
   "images/work-flow.png" 1749669279 110186 f797e768d65f1e7d2bf8117e4caea9ea ""
-  "main.aux" 1750097401 5488 91c419d5dc388883c25484b96e02d51b "pdflatex"
-  "main.bbl" 1750097401 7860 fd59065c505d03b44da007569e75a007 "bibtex main"
-  "main.out" 1750097401 1659 089713ee633d19b7356dccfec1926ea6 "pdflatex"
-  "main.tex" 1750097397 46999 e56a60880762e4c17a6fb88dacf3808b ""
-  "main.toc" 1750097401 1001 4cc0c9c204e6b8597e3a32086e39786f "pdflatex"
+  "main.aux" 1750168432 8360 2bd7cc52dea8fb9795f55af9cae53d81 "pdflatex"
+  "main.bbl" 1750168433 7823 fe2a9b19c1e892629d176190b238e5bb "bibtex main"
+  "main.out" 1750168432 1659 089713ee633d19b7356dccfec1926ea6 "pdflatex"
+  "main.tex" 1750168426 53328 b9225fd6eaf7e8e2a6eee5a1079b0b22 ""
+  "main.toc" 1750168432 1001 ce4fbaf87eeb9886da2869d65820b750 "pdflatex"
   (generated)
   "main.aux"
   "main.log"

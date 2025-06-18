@@ -297,7 +297,7 @@ Python package deep-translator was used to translate the text from the ASR model
 
 \section{Voice Cloning}
 Voice cloning is a subtask of speech synthesis, using deep learning to create speech imitating a specific voice. Prioritizing the preservation of the identity of the target speaker. Modern systems use a modular architecture to achieve realistic speech synthesis that replicates a target speaker's voice \cite{Real-time_voice_cloning_system}. Similar to lip-synch architectures, voice cloning also uses CNNs, GANs, Variatonal Autoencoders (VAEs), DIffusion Probabilistic models (DPM), RNNs and Transformer-based Models \cite{voice-cloning-survey}. We characterise voice cloning into several approaches, speaker adaption where we fine-tune a Text-to-Speech (TTS) model to replicate a specific user's voice using limited data \cite{voice-cloning-survey}. Few-Shot Voice Cloning (FS-TTS) follows the concept of the speaker adaption but specifies the amount of data required as it typically ranges from a few seconds to a maximum of five minutes. Zero-shot Voice Cloning (ZS-TTS) differs from the first two because it does not require fine-tuning for the TTS model. Instead it uses a speaker encoder which uses a short audio clip to generate speech with voice characteristics similar to the reference waveform \cite{voice-cloning-survey}. Multilingual Voice Cloning focuses on TTS systems that can support multiple lanuages while maintaining speaker's characteristics. Subdivisions of multilingual voice cloning are cross-lingual which allows the model to clone a reference voice and generate speech in a new language even if it was not largly present in the dataset. Intra-lingual are models with voice cloning within the same language. The NAUTILUS system from \cite{NAUTILUS} has the ability to clone untranscribed speech, using a small amount of untranscribed speech, cited as about five minutes. Experiments coparing performance with different amounts of adaptation data show that Mean Opinion Score (MOS) for naturalness and similarity can improve significantly from five seconds to 15 seconds of untranscribed audio, plateauing or showing only minor improvement beyond that (e.g. 30 or 60 seconds)\cite{Unified_system_for_Voice_Cloning_and_Voice_Conversion}. Noisy audio can negatively impact the quality of generated speech, a real-time voice cloning system notes that generated speech can have low intelligibility due to artifacts, such as murmurs, hums, or noisy audio \cite{Real-time_voice_cloning_system}. 
-Because of different trainning and test datasets different reasearch focus on metrics such as speaker similarity, speech naturalness, intelligibility. or computational efficiency. Azizah (2024) used WER and Character Error Rate (CER) to measure the accuracy of models, using Whiper to generate text from the speech and comparing it with the reference text \cite{zero-shot-voice-cloning}. This method of evaluation is used by several other models to measure their intellegibility \cite{harminizaion-of-voice-cloning}\cite{chen2021v2cvisualvoicecloning}\cite{NAUTILUS}\cite{zero-shot-voice-cloning}. User opinions, surveys, interviews, social media analysis, AB preference test, Degradation Mean Opinion Score (DMOS), these are all subjective measures and used is several models evaluation, because in the end the voice is made for humans to hear. Yemin et al. (2025) which created a foundation model for real-time autonomous interaction and voice role-play \cite{viola-voice-role-play}. OpenVoice acknowledges the inherent difficulty in objective numerical comparisons across many different studies due to a huge variety of datasets, scales, and core functionalities. Using the translated text into the language of our choice we can then try and use a voice cloning model to make the voice dubbing. A lot of models were available for this task, Nari Labs released Dia \cite{Dia}, Chatterbox from ResembleAI \cite{chatterbox}, OpenVoice \cite{openvoice}, Viola \cite{viola-voice-role-play}. Some models offered more options about voice control, OpenVoice offers tone color and style from a reference speaker, emotion, accent, rhythm, pauses and intonation. Chatterbox offers different values of exaggeration, pace and temperature. Pacing or audio speed is very crucial in our project because of the differences in length of the reference audio and the output audio in the target language may be shorter or longer. Chatterbox is a new Voice Cloning model, its main support is for English language and it is quite limited in duration as it cannot do more than 35-40 seconds before starting to lose quality. It offers options to control the voice cloning with CFG/Pace, random seed nad temperature, on the Huggingface Space it only allows for 300 characters maximum input which limits our abilities quite a lot. Trying different values for the pace does very little to the change of audio length as it mostly changes to although it is more natural than others, it still has issues as if the values of the pace change too much or the exaggeration value changes too much it can create artifacts, moments of silence of up to 4 seconds that did not exist in the reference audio.
+Because of different trainning and test datasets different reasearch focus on metrics such as speaker similarity, speech naturalness, intelligibility. or computational efficiency. Azizah (2024) used WER and Character Error Rate (CER) to measure the accuracy of models, using Whiper to generate text from the speech and comparing it with the reference text \cite{zero-shot-voice-cloning}. This method of evaluation is used by several other models to measure their intellegibility \cite{harminizaion-of-voice-cloning}\cite{chen2021v2cvisualvoicecloning}\cite{NAUTILUS}\cite{zero-shot-voice-cloning}. User opinions, surveys, interviews, social media analysis, AB preference test, Degradation Mean Opinion Score (DMOS), these are all subjective measures and used is several models evaluation, because in the end the voice is made for humans to hear. Yemin et al. (2025) which created a foundation model for real-time autonomous interaction and voice role-play \cite{viola-voice-role-play}. OpenVoice acknowledges the inherent difficulty in objective numerical comparisons across many different studies due to a huge variety of datasets, scales, and core functionalities. Using the translated text into the language of our choice we can then try and use a voice cloning model to make the voice dubbing. A lot of models were available for this task, Nari Labs released Dia \cite{Dia}, Chatterbox from ResembleAI \cite{chatterbox}, OpenVoice \cite{openvoice}, Viola \cite{viola-voice-role-play}. Some models offered more options about voice control, OpenVoice offers tone color and style from a reference speaker, emotion, accent, rhythm, pauses and intonation. Chatterbox offers different values of exaggeration, pace and temperature. Pacing or audio speed is very crucial in our project because of the differences in length of the reference audio and the output audio in the target language may be shorter or longer. Chatterbox is a new Voice Cloning model, its main support is for English language and it is quite limited in duration as it cannot do more than 35-40 seconds before starting to lose quality. It offers options to control the voice cloning with CFG/Pace, random seed nad temperature, on the Huggingface Space it only allows for 300 characters maximum input which limits our abilities quite a lot. Trying different values for the pace does very little to the change of audio length as it mostly changes to although it is more natural than others, it still has issues as if the values of the pace change too much or the exaggeration value changes too much it can create artifacts, moments of silence of up to 4 seconds that did not exist in the reference audio. Chatterbox includes a built-in PerTh Watermarking for responsible AI usage.  
 
 
 Voice cloning can be of help to those with speech disability, as most of the models are trained on normal human voices. Azizah (2024) presented zero-shot voice cloning Tacotron-2 based TTS for people with dysphonia, the choice for zero-shot was because of the impossibility of training a TTS model using data from people who suffer from dysphonia \cite{zero-shot-voice-cloning}.\\
@@ -314,15 +314,26 @@ Before deep learning lip-sync was achieved using viseme-based and rule-based sys
 \end{figure}
 Movement of the lips depend on the emotions of the speaker, researchers noticed that lip-syncing and broader facial animation are not the same across different emotional states like anger, sadness, happiness, surprise, fear etc. \cite{audio-driven-facial-animation}. These emotional nuances can indeed be learned and trained by advanced models to be cloned or mimiced in generated outputs \cite{multilingual-lip-sync} \cite{mimitalk}. Human evaluators consistentyl assess wether the generated output matches the emotional tone implied by the audio and they look for smooth transitions between emotinal expressions. Models like EmoTalk and EMOTE explicitly work to extract the emotions from the audio and integrate the effects of both emotion and speech to produce more nuanced emotional representations in 3D animations \cite{audio-driven-facial-animation}. 
 
-GeneFace++ is an improved version from GeneFace \cite{geneface} \cite{ye2023geneface++}, it progressed on three key areas, Audio-to-Motion Module, enhanced robustness (Landmark locally linear embedding), and improved efficiency (Instant Motion-to-Video Module). These additions aim to address the limitations of generalizability, video quality and system efficiency observed in the original GeneFace model. The nature of the architecture of the model, having a 3D model of the face can help with issues of Preparing the dataset before training was needed, the videos needed to be scaled into 512x512, mediapipe \cite{GoogleFaceDetector} was used as a facedetector. An early issue came up as the face detector could not detect any face in all frames of the video, this was the same for all the videos in the dataset. Getting the metadata information out, we observed that videos had a rotation of \-90 degrees. Mediaplayer applications would see this flag and add a 90 degree clockwise rotation to show the video correctly, but the face detection software would go through raw pixel data thus ignoring the flag and getting a sideways face. Most face detection models train on upright faces making them fail when faced with faces sideways or face-down. When applying a clockwise 90 degree rotation on the raw pixels of the video and changing the rotate flag to 0, the videos would come out as sideways, this might be beacuse ffmpeg might apply a correction rotation before the rotate command, thus we needed to apply two ffmpeg commands, one to rotate +90 degrees clockwise and set the rotate flag to 0, and the next command to rotate the video again with a -90 degrees counter-clockwise.
-The "min\_detection\_confidence" variable was also lowered from 0.7 as a default option to 0.6, with the new value the model was able to detect faces. Next step for processing data was audio feature extraction, using mel, f0, hubuert or esperanto. We extract individual image frames from the processed video, using lm2d\_mediapipe we extract 2D facial landmarks from the video frames. These 2D landmarks are crucial for fitting a 3D Morphable Model (3DMM) in the next step. Fitting 3DMM, we take 2D facial landmarks and "fit" them in a 3D Morphable Model to the person's face in each video frame. This makes the model more suitable for usage on a specific person as we are training the NeRF model for the head and torso. This fits our dataset more as the videos are of a single person. The last step is about packaging and organizing the generated data into a binary format that is optimised for efficient loading and training of the subsequent neural network model. Handling of different audio and video lengths, although not specifically mentioned in the research we can infer based on the architecture, the model would likely continue to generate facial motion based on the remaining audio. We can test to see how the model performs with a different head and torso NeRF model using the one pre-trained by GeneFace++ or train them ourselves before inferencing. GeneFace++ is a model that works by training the Audio2Motion model which comes pre-trained in this case. We need to train Motion2Video renderer ourselves after the data has been prepared. Training is done for the head model and the torso model separatly. Finalizing all of these we can go to inference, we used the longest video in the dataset (five minutes) to train the head and torso model. The head model takes the longest to train, being the most important part of the system. The model was trained for 250,000 updates (epochs). After 1 hour and 30 minutes of training the results were as shown in Figure \ref{img:training_head}. The total loss drops to the lowest value of 8.6979, after 20,000 epochs and continues rising till 384 in step 90,000. In Figure \ref{img:mse_sr_mse_loss} we can see that the Mean Square Error Loss (MSE) and Super-Resolution Mean Squared Error Loss (SR-MSE) keep going down consistently till step 30,000 where we can see fluctuations. The culprit of the high loss in our case is the lambda ambient loss, which we can see in Figure \ref{img:lambda_ambient_loss}, as the line for the lambda ambient loss fits perfectly with the line of our total loss. This value measures how well the model is handling the ambient (non-facial, background, or global lighting) aspects of the scene. Target ambient loss in the configuration files was changed from 1.0e-8 to 1.0e-6 which the authers say might be more suitable for men. 
+GeneFace++ is an improved version from GeneFace \cite{geneface} \cite{ye2023geneface++}, it progressed on three key areas, Audio-to-Motion Module, enhanced robustness (Landmark locally linear embedding), and improved efficiency (Instant Motion-to-Video Module). In Figure \ref{geneface} we can see the structure of the model, section (a) shows the full structure of the pipeline, from the inputed audio, training the Pitch-Aware Audio2Motion, Landmark LLe projection and the instant Motion2Video at the end \cite{ye2023geneface++}. These additions aim to address the limitations of generalizability, video quality and system efficiency observed in the original GeneFace model. The nature of the architecture of the model, having a 3D model of the face can help with issues of Preparing the dataset before training was needed, the videos needed to be scaled into 512x512, mediapipe \cite{GoogleFaceDetector} was used as a facedetector.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/training_head.png}
-    \caption{Training head model}
-    \label{img:training_head}
+    \includegraphics[width=0.5\textwidth]{images/geneface++.png}
+    \caption{GeneFace++}
+    \label{img:geneface}
 \end{figure}
+
+An early issue came up as the face detector could not detect any face in all frames of the video, this was the same for all the videos in the dataset. Getting the metadata information out, we observed that videos had a rotation of \-90 degrees. Mediaplayer applications would see this flag and add a 90 degree clockwise rotation to show the video correctly, but the face detection software would go through raw pixel data thus ignoring the flag and getting a sideways face. Most face detection models train on upright faces making them fail when faced with faces sideways or face-down. When applying a clockwise 90 degree rotation on the raw pixels of the video and changing the rotate flag to 0, the videos would come out as sideways, this might be beacuse ffmpeg might apply a correction rotation before the rotate command, thus we needed to apply two ffmpeg commands, one to rotate +90 degrees clockwise and set the rotate flag to 0, and the next command to rotate the video again with a -90 degrees counter-clockwise.
+The "min\_detection\_confidence" variable was also lowered from 0.7 as a default option to 0.6, with the new value the model was able to detect faces. Next step for processing data was audio feature extraction, using mel, f0, hubuert or esperanto. We extract individual image frames from the processed video, using lm2d\_mediapipe we extract 2D facial landmarks from the video frames. These 2D landmarks are crucial for fitting a 3D Morphable Model (3DMM) in the next step. Fitting 3DMM, we take 2D facial landmarks and "fit" them in a 3D Morphable Model to the person's face in each video frame. This makes the model more suitable for usage on a specific person as we are training the NeRF model for the head and torso. This fits our dataset more as the videos are of a single person. The last step is about packaging and organizing the generated data into a binary format that is optimised for efficient loading and training of the subsequent neural network model. Handling of different audio and video lengths, although not specifically mentioned in the research we can infer based on the architecture, the model would likely continue to generate facial motion based on the remaining audio. We can test to see how the model performs with a different head and torso NeRF model using the one pre-trained by GeneFace++ or train them ourselves before inferencing. GeneFace++ is a model that works by training the Audio2Motion model which comes pre-trained in this case. We need to train Motion2Video renderer ourselves after the data has been prepared. Training is done for the head model and the torso model separatly. Finalizing all of these we can go to inference, we used the longest video in the dataset (five minutes) to train the head and torso model. The model for the head was stopped after one hour and 30 minutes after observing the lack of change in the total loss value. From Figure \ref{img:head_model_training} we can see on graph Total Loss over Steps that the minimum value it reached (1.12 total loss) was at 15,000 and 20,000 steps. After it continued to fluctuate with a maximum of 20 and an average of 15.48. Mean Square Error Loss (MSE) and Super-Resolution Mean Squared Error Loss (SR MSE) go down at the begining of the steps and stay constant, while the Lambda Ambient has identical values to that of the total loss, this makes it the main factor contributing to the total loss value. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/head_training_loss.png}
+    \caption{Head model training}
+    \label{img:head_model_training}
+\end{figure}
+
+The models configuration was training for 250,000 steps. After 1 hour and 30 minutes of training the results were as shown in Figure \ref{img:training_loss}. The total loss drops to the lowest value of 8.6979, after 20,000 epochs and continues rising till 384 in step 90,000. In Figure \ref{img:mse_sr_mse_loss} we can see that MSE and SR-MSE keep going down consistently till step 30,000 where we can see fluctuations. The culprit of the high loss in our case is the lambda ambient loss, which we can see in Figure \ref{img:lambda_ambient_loss}, as the line for the lambda ambient loss fits perfectly with the line of our total loss. This value measures how well the model is handling the ambient (non-facial, background, or global lighting) aspects of the scene. Target ambient loss in the configuration files was changed from 1.0e-8 to 1.0e-6 which the authors say might be more suitable for men. 
 
 \begin{figure}[h!]
     \centering
@@ -333,19 +344,23 @@ The "min\_detection\_confidence" variable was also lowered from 0.7 as a default
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/lambda_ambient_loss.png}
-    \caption{Lambda ambient loss}
-    \label{img:lambda_ambient_loss}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/training_loss.png}
+        \caption{Total Loss}
+        \label{fig:training_loss}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/lambda_ambient_loss.png}
+        \caption{Lambda ambient Loss}
+        \label{fig:lambda_ambient_loss}
+    \end{minipage}
+    \caption{Results from head model training}
+    \label{fig:first-head-training}
 \end{figure}
 
 After the changes the ambientloss values were as shown in Figure \ref{img:ambient_loss_v2}. MSE and SR-MSE loss values were as shown in Figure \ref{img:MSE_v2}. The model was trained for 198,000 steps before stopping as the loss values got below 0.001 as shown in Figure \ref{img:total_loss_v2}.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.5\textwidth]{images/ambient_loss_v2.png}
-    \caption{Ambient loss second iteration}
-    \label{img:ambient_loss_v2}
-\end{figure}
 
 \begin{figure}[h!]
     \centering
@@ -356,21 +371,65 @@ After the changes the ambientloss values were as shown in Figure \ref{img:ambien
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/total_loss_v2.png}
-    \caption{Total loss second iteration}
-    \label{img:total_loss_v2}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/ambient_loss_v2.png}
+        \caption{Ambient loss second run}
+        \label{fig:ambient_loss_v2}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/total_loss_v2.png}
+        \caption{Lambda ambient Loss}
+        \label{fig:total_loss_v2}
+    \end{minipage}
+    \caption{Results from second training}
+    \label{fig:second-training}
 \end{figure}
+
+The training of the Torso NeRF model is dependent on the performance of the pre-trained Head NeRF model. During the initial training of the Head NeRF model, suboptimal convergence behaviour rendered the resulting Head model unsuitable. Consequently, any Torso NeRF model trained using the badly optimised Head model is unreliable for the final generation pipeline.\\
+A third training was done to the torso model after changes to the configuration files, lambda ambient value and eye blink dim changes from four to two. In Figure \ref{fig:validation_torso_total_loss} we can total loss per training steps, the lowest total loss value occured at step 34,000. The training was stopped at 46,000 steps as the total loss was not decreasing more. At 8000 steps the models total loss is 0.104, showing a slight decrease to a minimum of 0.0768 at 38,000, before rising slightly again. It is largly plateauing within the range of approximately 0.076 to 0.112. This means the models overall performance on the validation set is no longer significantly improving. 
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/torso_weight_entropy_loss.png}
+        \caption{Weight Entropy loss}
+        \label{fig:torso_weight_entropy_loss}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/validation_torso_total_loss.png}
+        \caption{Validation Torso Total loss}
+        \label{fig:validation_torso_total_loss}
+    \end{minipage}
+    \caption{Results from third torso model training}
+    \label{fig:third-training}
+\end{figure}
+
+The first inference was run with the debug flag to check for any errors during the process, and Image \ref{img:first_inference} we can see the three parts, on the left we have the produced video, in the middle we have the landmarks for the face and lips, and on the right is the mask for the whole face. From the outputed video, we can observe the decrease in image quality, the face features were not very visible and the mouth was not moving as well copared to the landmarks and the mask, the last two were in sync with the audio provided for inference. The video lasted as long as the audio did, so we can conclude that GeneFace++ does shorten the video according to the audio length because of its architecture with the 3D model. This also means we can produce content with audio that is longer than the original video reference. Despite multiple tests we were not able to make the trained model on our dataset work as intended to create a clear lip-sync, the landmarks as shown in the debug faze, are synched but the overlapping face on the speaker was not able to replicate those. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/first_inference.png}
+    \caption{First inference}
+    \label{img:first_inference}
+\end{figure}
+
+
 
 \section{Future improvements}
 Creating an open-source albanian ASR model, using models like Kushtrims and utilizing the free credits from Google Speech-to-Text API, making use of the confidence score to save only audio that is above a certain threshold, to create a dataset that is more accurate and reliable.\\
 An ASR model of the target languagecan be used to verify the accuracy of the voice cloning model, by comparing the transcribed text with the translated text, for this we would need the target language ASR model to be very accurate.\\
 LLMs can be used to translate the text, and could be of help when faced with discrepancy in audio timing of the reference audio and the cloned audio. Making the text shorter while keeping the meaning of the text the same. Changing the text to be more suitable for the voice cloning model. When faced with text that is of Albanian dialect, LLM could be used to transform the text to be more suitable for the voice cloning model.\\
 
+
 \section{Limitations}
 The project is limited to only the Albanian language as such the dataset is comprised of only Albanian speaking videos. Lack of open-source ASR models, and freely available datasets that fit into our requirements of having the person speak Albanian clearly, and facing the camera. Human evaluation bias in voice cloning, which is subjective and can be faulty or biased. Storage and computational power requirements, both local storage and cloud storage. Using Huggingface Spaces was problematic because the speed of audio transcription changes based on the availability of resources as everyone can use it, similar situation for the voice cloning models tried.\\
 While Kushtrims model does say it is trained on Albanian audio with dialects, traditional translation models are not able to handle dialects, thus leading to a bottleneck in the project.\\
 Voice cloning models that could not produce audio more than 30 seconds created an issue in cases where the videos were longer than 30 seconds.\\
-Different models had different ways to prepare the data for training, some models required the data to be in a specific format, creating a need to save the original data without changes then applying the format to create new data, increasing the amount of data stored.
+Different models had different ways to prepare the data for training, some models required the data to be in a specific format, creating a need to save the original data without changes then applying the format to create new data, increasing the amount of data stored. These differences create the need to make scripts to process the videos according to the format, and issues such as out metadata rotate flag might come up and need special solutions. Some models were limited on image quality or image size, Wav2Lip requiring downgrading to 720p video quality in cases where the computing power is not enough.\\
+In unknown languages it would be hard to detect anomalies in voice cloned speech, sounding words longer than it should, cutting words in half, or making the words shorter than they should are issues that are hard to detect if you are not a native speaker. 
 
 \subsection{Questions raised}
 List of questions:
@@ -387,7 +446,7 @@ List of questions:
     \item Best way to handle differences between original audio timing and the voice cloned sample timing. (slow down the voice? speedup)
     \item Is an LLM better than a traditional tool for translating? Neural Machine Translation (NMT) vs Large Language Models.
 \end{itemize}
-AS for the optimal length of the video chunks, the study done by \cite{PAWAR2024100084} faced challanges with lengthy continuous speech, inlcuding time-consuming merging issues and potential overfitting. This was addressed by using the "vVISWa" dataset which contains isolated words or indepentent speech. This improved the performance of the model a lot and reduced overfitting. However Goncalves et al. (2024) using the LRS3 dataset containing short sentences averaging 3.42 seconds, found that using such short sentences could lead to a drop in translation quality \cite{lipsynchronydirectaudiovisual}.
+As for the optimal length of the video chunks, the study done by \cite{PAWAR2024100084} faced challanges with lengthy continuous speech, inlcuding time-consuming merging issues and potential overfitting. This was addressed by using the "vVISWa" dataset which contains isolated words or indepentent speech. This improved the performance of the model a lot and reduced overfitting. However Goncalves et al. (2024) using the LRS3 dataset containing short sentences averaging 3.42 seconds, found that using such short sentences could lead to a drop in translation quality \cite{lipsynchronydirectaudiovisual}.
 
 
 List of challanges:

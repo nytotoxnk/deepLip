@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.26)  16 JUN 2025 20:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.26)  17 JUN 2025 15:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -597,37 +597,102 @@ Package pdftex.def Info: images/visemes.png  used on input line 311.
 LaTeX Warning: Citation `audio-driven-facial-animation' on page 13 undefined on input line 315.
 
 
-LaTeX Warning: Citation `multilingual-lip-sync' on page 13 undefined on input line 315.
-
-
-LaTeX Warning: Citation `mimitalk' on page 13 undefined on input line 315.
+LaTeX Warning: Citation `audio-driven-facial-animation' on page 13 undefined on input line 315.
 
 
 
 [13]
 
 [14 <./images/visemes.png>]
+<images/head_training_loss.png, id=237, 1204.5pt x 803.0pt>
+File: images/head_training_loss.png Graphic file (type png)
+<use images/head_training_loss.png>
+Package pdftex.def Info: images/head_training_loss.png  used on input line 322.
+(pdftex.def)             Requested size: 241.84843pt x 161.22205pt.
+
 
 [15]
+<images/mse_sr_mse_loss.png, id=249, 1003.75pt x 602.25pt>
+File: images/mse_sr_mse_loss.png Graphic file (type png)
+<use images/mse_sr_mse_loss.png>
+Package pdftex.def Info: images/mse_sr_mse_loss.png  used on input line 331.
+(pdftex.def)             Requested size: 241.84843pt x 145.10352pt.
+<images/training_loss.png, id=250, 1003.75pt x 602.25pt>
+File: images/training_loss.png Graphic file (type png)
+<use images/training_loss.png>
+Package pdftex.def Info: images/training_loss.png  used on input line 340.
+(pdftex.def)             Requested size: 174.13034pt x 104.47636pt.
+<images/lambda_ambient_loss.png, id=251, 1003.75pt x 602.25pt>
+File: images/lambda_ambient_loss.png Graphic file (type png)
+<use images/lambda_ambient_loss.png>
+Package pdftex.def Info: images/lambda_ambient_loss.png  used on input line 346.
+(pdftex.def)             Requested size: 174.13034pt x 104.47636pt.
+<images/MSE_v2.png, id=255, 1003.75pt x 602.25pt>
+File: images/MSE_v2.png Graphic file (type png)
+<use images/MSE_v2.png>
+Package pdftex.def Info: images/MSE_v2.png  used on input line 358.
+(pdftex.def)             Requested size: 241.84843pt x 145.10352pt.
 
-LaTeX Warning: Citation `lipsynchronydirectaudiovisual' on page 16 undefined on input line 348.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/ambient_loss_v2.png, id=256, 1003.75pt x 602.25pt>
+File: images/ambient_loss_v2.png Graphic file (type png)
+<use images/ambient_loss_v2.png>
+Package pdftex.def Info: images/ambient_loss_v2.png  used on input line 367.
+(pdftex.def)             Requested size: 174.13034pt x 104.47636pt.
+<images/total_loss_v2.png, id=257, 1003.75pt x 602.25pt>
+File: images/total_loss_v2.png Graphic file (type png)
+<use images/total_loss_v2.png>
+Package pdftex.def Info: images/total_loss_v2.png  used on input line 373.
+(pdftex.def)             Requested size: 174.13034pt x 104.47636pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `fig:validation_torso_total_loss' on page 16 undefined on input line 382.
+
+<images/torso_weight_entropy_loss.png, id=258, 1003.75pt x 602.25pt>
+File: images/torso_weight_entropy_loss.png Graphic file (type png)
+<use images/torso_weight_entropy_loss.png>
+Package pdftex.def Info: images/torso_weight_entropy_loss.png  used on input line 387.
+(pdftex.def)             Requested size: 174.13034pt x 104.47636pt.
+<images/validation_torso_total_loss.png, id=259, 1003.75pt x 602.25pt>
+File: images/validation_torso_total_loss.png Graphic file (type png)
+<use images/validation_torso_total_loss.png>
+Package pdftex.def Info: images/validation_torso_total_loss.png  used on input line 393.
+(pdftex.def)             Requested size: 174.13034pt x 104.47636pt.
+
+
+[16 <./images/head_training_loss.png> <./images/mse_sr_mse_loss.png> <./images/training_loss.png> <./images/lambda_ambient_loss.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 404--407
+
+ []
 
 
 
-[16]
-Overfull \hbox (5.78853pt too wide) in paragraph at lines 374--375
+[17 <./images/MSE_v2.png> <./images/ambient_loss_v2.png> <./images/total_loss_v2.png>]
+
+[18 <./images/torso_weight_entropy_loss.png> <./images/validation_torso_total_loss.png>]
+
+[19]
+Overfull \hbox (5.78853pt too wide) in paragraph at lines 455--456
 []\OT1/cmr/m/n/12 Albanian ASR open-source model, google speech-to-text API is paid ser-vice, and Kushtrims
  []
 
 
 
-[17] (main.bbl
+[20] (main.bbl
 
-[18]
+[21]
 
-[19])
+[22])
 
-[20] (main.aux)
+[23] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
@@ -636,21 +701,27 @@ L3 programming layer <2025-03-26>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 089713EE633D19B7356DCCFEC1926EA6;1659.
  ) 
 Here is how much of TeX's memory you used:
- 19225 strings out of 469959
- 375336 string characters out of 5470318
- 746705 words of memory out of 5000000
- 45682 multiletter control sequences out of 15000+600000
+ 19320 strings out of 469959
+ 378173 string characters out of 5470318
+ 747191 words of memory out of 5000000
+ 45764 multiletter control sequences out of 15000+600000
  634140 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  86i,13n,117p,3406b,1171s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{figure.caption.11} has been referenced but does not exist, replaced by a fixed one
+
  <C:\Users\aldo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/aldo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (21 pages, 14419254 bytes).
+Output written on main.pdf (24 pages, 14868842 bytes).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 125 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 364 PDF objects out of 1000 (max. 8388607)
+ 85 named destinations out of 1000 (max. 500000)
+ 170 words of extra memory for PDF output out of 10000 (max. 10000000)
 

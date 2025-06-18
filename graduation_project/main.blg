@@ -6,53 +6,64 @@ Case mismatch error between cite keys audio-driven-facial-animation and Audio-dr
  : \citation{audio-driven-facial-animation
  :                                        }
 I'm skipping whatever remains of this command
+Case mismatch error between cite keys audio-driven-facial-animation and Audio-driven-facial-animation
+---line 73 of file main.aux
+ : \citation{audio-driven-facial-animation
+ :                                        }
+I'm skipping whatever remains of this command
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Database file #1: references.bib
-Repeated entry---line 647 of file references.bib
+I was expecting a `,' or a `}'---line 53 of file references.bib
+ :   
+ :   title = {Speech to Text API},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 649 of file references.bib
  : @article{audio-driven-facial-animation
  :                                       ,
 I'm skipping whatever remains of this entry
+Warning--empty title in google_api_docs
 You've used 35 entries,
             2118 wiz_defined-function locations,
-            664 strings with 10184 characters,
-and the built_in function-call counts, 11354 in all, are:
-= -- 1018
+            664 strings with 10219 characters,
+and the built_in function-call counts, 11348 in all, are:
+= -- 1016
 > -- 747
 < -- 5
 + -- 303
 - -- 262
-* -- 781
-:= -- 1966
-add.period$ -- 97
+* -- 782
+:= -- 1964
+add.period$ -- 96
 call.type$ -- 35
 change.case$ -- 237
 chr.to.int$ -- 0
-cite$ -- 35
+cite$ -- 36
 duplicate$ -- 348
 empty$ -- 798
 format.name$ -- 262
-if$ -- 2305
+if$ -- 2303
 int.to.chr$ -- 0
 int.to.str$ -- 35
 missing$ -- 17
-newline$ -- 169
+newline$ -- 168
 num.names$ -- 70
-pop$ -- 296
+pop$ -- 299
 preamble$ -- 1
 purify$ -- 201
 quote$ -- 0
-skip$ -- 297
+skip$ -- 296
 stack$ -- 0
 substring$ -- 386
-swap$ -- 69
+swap$ -- 68
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 138
-warning$ -- 0
+warning$ -- 1
 while$ -- 82
 width$ -- 37
-write$ -- 352
-(There were 2 error messages)
+write$ -- 350
+(There were 4 error messages)
